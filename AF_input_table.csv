@@ -1,0 +1,26 @@
+variable;lower ;median;upper;distribution;label;description
+n_years;25;NA;25;const;years;The time span that is modelleed
+establishment_cost_mono;100000;NA;1000000;posnorm;NPR/ha*a;Cost of rubber establishment in Nepalese rupee/ha  (1000 euro egale ~144000 NPR)
+establishment_cost_AF;145000;NA;1500000;posnorm;NPR/ha*a;Cost of rubber and pepper establishment in Nepalese rupee/ha
+rubber_main_cost;20000;NA;100000;posnorm;NPR/ha*a;Cost to maintain rubber system (million NPR/year)
+var_rubber_main_cost;5;NA;15;posnorm;%;The variance in rubber maintenance cost 
+pepper_main_cost;10000;NA;250000;posnorm;NPR/ha*a;Annual cost to maintain black pepper system (million NPR/year)
+var_pepper_main_cost;5;NA;15;posnorm;%;The variance in pepper maintenance cost 
+max_pepper_yield;10;NA;200;posnorm;NPR/ha*a;The peak yield of pepper (t/ha)
+var_pepper_yield;10;NA;20;posnorm;%;The variance in pepper yield 
+max_rubber_yield;20;NA;450;posnorm;NPR/ha*a;The peak yield of rubber
+var_rubber_yield;10;NA;20;posnorm;%;The variance in rubber yield 
+rubber_price;140000;NA;200000;posnorm;NPR/t/ha;Price of a rubber per tonnes 
+pepper_price;80000;NA;150000;posnorm;NPR/t/ha;Price of pepper per tonne
+mono_nutrient;20;NA;180;posnorm;NPR/ha*a;Kg of nutrient returned to the soil in rubber monoculture
+var_mono_nutrient;5;NA;12;posnorm;%;The variance in returned nutrients in monoculture
+mono_nutrient_saved;2000;NA;60000;posnorm;NPR/ha;Monetary value of nutrient recycled in rubber mono
+AF_nutrient;10;NA;300;posnorm;NPR/ha*a;Kg of nutrient returned to the soil in AF
+var_AF_nutrient;5;NA;40;posnorm;%;The variance in returned nutrients in monoculture
+AF_nutrient_saved;1500;NA;90000;posnorm;NPR/ha;Monetary value of nutrient recycled in AF
+mono_water;50;NA;1000;posnorm;ltrs/ha*a;Liters of water saved through interception in rubber mono
+var_mono_water;5;NA;30;posnorm;%;The variance in water saved in interception in rubber mono
+cost_water;1450;NA;30000;posnorm;NPR/ltrs;Monetary value of water saved through interception in rubber mono
+var_cost_water;5;Na;20;posnorm;%;Variance in water costs
+AF_water;80;NA;2100;posnorm;ltrs/ha*a;Liters of water saved through interception in AF
+var_AF_water;5;NA;30;posnorm;%;The variance in water saved in interception in rubber mono

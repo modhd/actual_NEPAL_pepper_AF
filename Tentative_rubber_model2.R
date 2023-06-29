@@ -62,10 +62,9 @@ model_function <- function() {
   final_income_AF <- AF_benefit + rubber_benefit - (establishment_cost_AF + maintenance_cost_pepper
                                                    + maintenance_cost_mono)
 
-  # use 'discount' to calculate net present value 
-  # 'discount_rate' is expressed in percent
-  NPV_mono <- discount(final_income_mono, discount_rate = 5, calculate_NPV = TRUE)
-  NPV_AF <- discount(final_income_AF, discount_rate = 5, calculate_NPV = TRUE)
+  # discount rate set to 10 percent
+  NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)
+  NPV_AF <- discount(final_income_AF, discount_rate = 10, calculate_NPV = TRUE)
   
   # calculate the overall NPV of the decision (do - don't do)
   NPV_decision <- NPV_AF - NPV_mono
