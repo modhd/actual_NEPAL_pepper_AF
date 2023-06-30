@@ -31,17 +31,14 @@ model_function <- function() {
                             n = n_years)
   AF_nutrient_saved <- AF_nutrient * AF_nutrient_saved
   
-  ##saved water----
+  ##pepper irrigation costs----
   cost_water <- vv(cost_water, var_cost_water, n_years)
   
-  mono_water <- vv(mono_water, var_mono_water, n_years)
-  cost_mono_water <- mono_water * cost_water
-  
-  AF_water <- vv(mono_water, var_mono_water, n_years)
+  AF_water <- vv(AF_water, var_mono_water, n_years)
   cost_AF_water <- mono_water * cost_water
   
   #Final benefits----
-  rubber_benefit <- rubber_income + mono_nutrient_saved + cost_mono_water
+  rubber_benefit <- rubber_income + mono_nutrient_saved
   AF_benefit <- pepper_income + rubber_income + AF_nutrient_saved + cost_AF_water
   
   # Costs----
@@ -60,7 +57,7 @@ model_function <- function() {
     
   #AF----
   final_income_AF <- AF_benefit + rubber_benefit - (establishment_cost_AF + maintenance_cost_pepper
-                                                   + maintenance_cost_mono)
+                                                   + maintenance_cost_mono + water_costs)
 
   # discount rate set to 10 percent
   NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)

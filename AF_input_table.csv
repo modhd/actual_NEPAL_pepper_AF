@@ -18,9 +18,9 @@ mono_nutrient_saved;2000;NA;60000;posnorm;NPR/ha;Monetary value of nutrient recy
 AF_nutrient;10;NA;300;posnorm;NPR/ha*a;Kg of nutrient returned to the soil in AF
 var_AF_nutrient;5;NA;40;posnorm;%;The variance in returned nutrients in monoculture
 AF_nutrient_saved;1500;NA;90000;posnorm;NPR/ha;Monetary value of nutrient recycled in AF
-mono_water;50;NA;1000;posnorm;ltrs/ha*a;Liters of water saved through interception in rubber mono
-var_mono_water;5;NA;30;posnorm;%;The variance in water saved in interception in rubber mono
+;;;;;;
+;;;;;;
 cost_water;1450;NA;30000;posnorm;NPR/ltrs;Monetary value of water saved through interception in rubber mono
 var_cost_water;5;Na;20;posnorm;%;Variance in water costs
-AF_water;80;NA;2100;posnorm;ltrs/ha*a;Liters of water saved through interception in AF
+AF_water;600;NA;2500;posnorm;m^3/ha*a;Liters of water needed for pepper cultivation
 var_AF_water;5;NA;30;posnorm;%;The variance in water saved in interception in rubber mono
