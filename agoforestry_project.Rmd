@@ -26,20 +26,19 @@ library(DiagrammeR)
 
 # HowTo: Croff-References of Tables anf Figures
 1. Copy the BibTex code of the reference into the bib/references textfile in the repository
-2. insert the ```{asis, echo=FALSE}``` optin in the r-chunk where you want to cite (see example below).
+2. insert the ```{asis, echo=FALSE}``` opton in in the r-chunk where you want to cite (see example below).
 3. Citation: see example
 
-```{asis, echo=FALSE}
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 For citing: Figure - \@ref(fig:name) , Table - \@ref(tab:table)
 
 i.e. \@ref(tab:inputtable)
-```
 
 
 # HowTo: References 
-
+In-text references: ```[@R-<shorturl as stated in the bibtex file>]``` i.e. The [@decisionSupport] package
+was used to conduct the MC simulation as well as the NPV and VoI calcutations.
 
 
 ```{r, add_packages_bib, include=FALSE}
@@ -55,7 +54,7 @@ knitr::write_bib(c(.packages(),
 
 ## Input estimates
 
-```{r inputtable, caption= "Input variables as used in the decision analysis.", echo=FALSE, warning=FALSE}
+```{r input_table, caption= "Input variables as used in the decision analysis.", echo=FALSE, warning=FALSE}
 library(knitr)
 options(scipen = 999)
 
@@ -64,6 +63,9 @@ input_estimates <- read.csv("./data/AF_input_table.csv", header = TRUE, sep = ";
 input_estimates = subset(input_estimates, select = -c(median))
 kable(input_estimates[2:7])
 ``` 
+
+Since Black Pepper grows best within moist climate, it's cultivation usually requires irrigation. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter. Thereby, especially the wintermonths are crucial to archieve high yields and often, Pepper plants need to be irrigated. _[This knowledge was obtained by a fast literature research, Aditi and Team Report can you correct false facts if you humble over such? - Heidi]_ 
+We assumed that growing Black Pepper next to Rubber trees could either mitigate irrigation requirements as the rubber's shadow would increase the moisture, or amplify them as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
 
 ## Code
 
@@ -206,6 +208,8 @@ plot_distributions(mcSimulation_object = AF_mc_simulation,
 ## Value of Information (VoI) analysis
 
 ```{r VoI, echo=F, fig.align='center', fig.cap="Results of the Value of Information analysis."}
+
+#if you want to reference to this fig, use \@ref(fig:VoI)
 
 plot_evpi(AF_evpi, decision_vars = "NPV_decision")
 ```
