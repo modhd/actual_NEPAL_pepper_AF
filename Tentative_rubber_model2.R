@@ -10,15 +10,7 @@ str(table) #check whether reading data was successful
 # Model function----
 
 model_function <- function() {
-  
-  #Yield incomes----
-  rubber_yield <- vv(var_mean = max_rubber_yield, var_CV = var_rubber_yield, n = n_years)
-  rubber_income <- rubber_yield * rubber_price
-  
-  rubber_yield <- vv(var_mean = max_pepper_yield, var_CV = var_pepper_yield, n = n_years)
-  pepper_income <- max_pepper_yield * pepper_price
-    
-  
+
   #Natural benefits----
   ##enhanced nutrient cycle----
   mono_nutrient <- vv(var_mean = mono_nutrient,
@@ -31,16 +23,44 @@ model_function <- function() {
                             n = n_years)
   AF_nutrient_saved <- AF_nutrient * AF_nutrient_saved
   
-  ##pepper irrigation costs----
-  cost_water <- vv(cost_water, var_cost_water, n_years)
+  ##2 scenarios of water management and yields----
+  ### generally, pepper needs to be irrigated which is an addition cost.
+  ### As it is not known yet, the moist microclimate underneath the rubber trees can result in higher yields
+  ### or, on the other hand, competition of the roots might lead to lower yields of both crops
+  water_competition <- chance_event(water_competition_probability, value_if = 1, value_if_not = 0)
   
-  AF_water <- vv(AF_water, var_mono_water, n_years)
-  cost_AF_water <- mono_water * cost_water
   
+  # benefitial microclimate: enhanced yields (higher median values of the yield distributions)
+  ## and lower irrigation costs (also, lower median)
+  if (water_competition == 0) {
+    mean_AF_water <- min_AF_water
+    mean_rubber_yield <- max_rubber_yield
+    mean_pepper_yield <- max_pepper_yield
+    rel_trend = FALSE
+
+  # negative competition: lower yields with negative trend
+  } else {
+    mean_AF_water <- max_AF_water
+    mean_rubber_yield <- min_rubber_yield
+    rel_trend = -10
+    mean_pepper_yield <- min_pepper_yield
+  }
+  
+  # Yields----
+  #Yield incomes
+  rubber_yield <- vv(var_mean = mean_rubber_yield, var_CV = var_rubber_yield, n = n_years,
+                     relative_trend = rel_trend)
+  rubber_income <- rubber_yield * rubber_price
+  
+  pepper_yield <- vv(var_mean = mean_pepper_yield, var_CV = var_pepper_yield, n = n_years,
+                     relative_trend = rel_trend)
+  pepper_income <- pepper_yield * pepper_price
+
   #Final benefits----
   rubber_benefit <- rubber_income + mono_nutrient_saved
-  AF_benefit <- pepper_income + rubber_income + AF_nutrient_saved + cost_AF_water
+  AF_benefit <- pepper_income + rubber_income + AF_nutrient_saved
   
+
   # Costs----
   ##establishment costs in 1rst year----
   establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years))
@@ -51,13 +71,17 @@ model_function <- function() {
   maintenance_cost_pepper <- vv(pepper_main_cost, var_CV = var_pepper_main_cost,
                               n = n_years)
   
+  # Water costs----
+  cost_water <- vv(cost_water, var_cost_water, n_years)
+  AF_water <- vv(mean_AF_water, var_AF_water, n_years)
+  cost_AF_water <- AF_water * cost_water
   
   #Substracting the costs to get final benefits----
   final_income_mono <- rubber_benefit - (maintenance_cost_mono + establishment_cost_mono)
     
   #AF----
   final_income_AF <- AF_benefit + rubber_benefit - (establishment_cost_AF + maintenance_cost_pepper
-                                                   + maintenance_cost_mono + water_costs)
+                                                   + maintenance_cost_mono + cost_AF_water)
 
   # discount rate set to 10 percent
   NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)

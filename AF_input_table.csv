@@ -7,8 +7,10 @@ var_rubber_main_cost;5;NA;15;posnorm;%;The variance in rubber maintenance cost
 pepper_main_cost;10000;NA;250000;posnorm;NPR/ha*a;Annual cost to maintain black pepper system (million NPR/year)
 var_pepper_main_cost;5;NA;15;posnorm;%;The variance in pepper maintenance cost 
 max_pepper_yield;10;NA;200;posnorm;NPR/ha*a;The peak yield of pepper (t/ha)
+min_pepper_yield;5;NA;100;posnorm;NPR/ha*a;The peak yield of pepper (t/ha)
 var_pepper_yield;10;NA;20;posnorm;%;The variance in pepper yield 
 max_rubber_yield;20;NA;450;posnorm;NPR/ha*a;The peak yield of rubber
+min_rubber_yield;10;NA;225;posnorm;;
 var_rubber_yield;10;NA;20;posnorm;%;The variance in rubber yield 
 rubber_price;140000;NA;200000;posnorm;NPR/t/ha;Price of a rubber per tonnes 
 pepper_price;80000;NA;150000;posnorm;NPR/t/ha;Price of pepper per tonne
@@ -18,9 +20,9 @@ mono_nutrient_saved;2000;NA;60000;posnorm;NPR/ha;Monetary value of nutrient recy
 AF_nutrient;10;NA;300;posnorm;NPR/ha*a;Kg of nutrient returned to the soil in AF
 var_AF_nutrient;5;NA;40;posnorm;%;The variance in returned nutrients in monoculture
 AF_nutrient_saved;1500;NA;90000;posnorm;NPR/ha;Monetary value of nutrient recycled in AF
-;;;;;;
-;;;;;;
 cost_water;1450;NA;30000;posnorm;NPR/ltrs;Monetary value of water saved through interception in rubber mono
-var_cost_water;5;Na;20;posnorm;%;Variance in water costs
-AF_water;600;NA;2500;posnorm;m^3/ha*a;Liters of water needed for pepper cultivation
-var_AF_water;5;NA;30;posnorm;%;The variance in water saved in interception in rubber mono
+var_cost_water;5;NA;20;posnorm;%;Variance in water costs
+water_competition_probability;0.3;NA;0.8;tnorm_0_1;-;The probability that roots will compete (higher irrigatiuon costs and lower yields)
+var_AF_water;5;NA;30;posnorm;m^3/ha*a ;The variance in water saved in interception in rubber mono
+min_AF_water;600;1000;2500;posnorm;m^3/ha*a ;
+max_AF_water;600;2000;2500;posnorm;m^3/ha*a ;
