@@ -10,6 +10,11 @@ str(table) #check whether reading data was successful
 # Model function----
 
 model_function <- function() {
+  # Sceniaros
+  ### As it is not known yet, the moist microclimate underneath the rubber trees can result in higher yields
+  ### or, on the other hand, competition of the roots might lead to lower yields of both crops
+  water_competition <- chance_event(water_competition_probability, value_if = 1, value_if_not = 0)
+  
 
   #Natural benefits----
   ##enhanced nutrient cycle----
@@ -23,40 +28,28 @@ model_function <- function() {
                             n = n_years)
   AF_nutrient_saved <- AF_nutrient * AF_nutrient_saved
   
-  ##2 scenarios of water management and yields----
-  ### generally, pepper needs to be irrigated which is an addition cost.
-  ### As it is not known yet, the moist microclimate underneath the rubber trees can result in higher yields
-  ### or, on the other hand, competition of the roots might lead to lower yields of both crops
-  water_competition <- chance_event(water_competition_probability, value_if = 1, value_if_not = 0)
-  
-  
-  # benefitial microclimate: enhanced yields (higher median values of the yield distributions)
-  ## and lower irrigation costs (also, lower median)
-  if (water_competition == 0) {
-    mean_AF_water <- min_AF_water
-    mean_rubber_yield <- max_rubber_yield
-    mean_pepper_yield <- max_pepper_yield
-    rel_trend = FALSE
 
-  # negative competition: lower yields with negative trend
-  } else {
-    mean_AF_water <- max_AF_water
-    mean_rubber_yield <- min_rubber_yield
-    rel_trend = -10
-    mean_pepper_yield <- min_pepper_yield
-  }
-  
   # Yields----
-  #Yield incomes
-  rubber_yield <- vv(var_mean = mean_rubber_yield, var_CV = var_rubber_yield, n = n_years,
-                     relative_trend = rel_trend)
-  rubber_income <- rubber_yield * rubber_price
+  # account for risk in diminished yields due to knowledge gaps especially at the initial phase
+  # and risk of knowledge gaps that could also lead to lower yields
+  management_errors <- vv(var_mean = knowledge_gap_probability, var_CV = var_knowledge_gap_probability,
+                          n = n_years, relative_trend = - 10)
   
-  pepper_yield <- vv(var_mean = mean_pepper_yield, var_CV = var_pepper_yield, n = n_years,
-                     relative_trend = rel_trend)
-  pepper_income <- pepper_yield * pepper_price
+  # Yield incomes
+  ## account for water competition risk and initial knowledge gaps
+  rubber_yield <- vv(var_mean = max_rubber_yield * (water_competition * yield_if_competition), 
+                     var_CV = var_rubber_yield, n = n_years)
+  rubber_yield <- rubber_yield * (1 - management_errors)
+  rubber_income <- rubber_yield * rubber_price
+    
 
-  #Final benefits----
+  pepper_yield <- vv(var_mean = max_pepper_yield * (water_competition * yield_if_competition),
+                     var_CV = var_pepper_yield, n = n_years)
+  pepper_yield <- pepper_yield * (1 - management_errors)
+  pepper_income <- pepper_yield * pepper_price
+  
+
+    #Final benefits----
   rubber_benefit <- rubber_income + mono_nutrient_saved
   AF_benefit <- pepper_income + rubber_income + AF_nutrient_saved
   
@@ -71,10 +64,19 @@ model_function <- function() {
   maintenance_cost_pepper <- vv(pepper_main_cost, var_CV = var_pepper_main_cost,
                               n = n_years)
   
+  
   # Water costs----
+  ### pepper needs to be irrigated which is an addition cost.
   cost_water <- vv(cost_water, var_cost_water, n_years)
-  AF_water <- vv(mean_AF_water, var_AF_water, n_years)
+  
+  if (water_competition) {
+    AF_water <- vv(mean_AF_water, var_AF_water, n_years)
+  } else {
+    AF_water <- vv(competition_AF_water, var_AF_water, n_years)
+  }
+    
   cost_AF_water <- AF_water * cost_water
+  
   
   #Substracting the costs to get final benefits----
   final_income_mono <- rubber_benefit - (maintenance_cost_mono + establishment_cost_mono)
@@ -97,6 +99,7 @@ model_function <- function() {
   
   
 }
+#debug(model_function)
 
 
 # Montecarlo Simulation ####
@@ -125,6 +128,4 @@ evpi_AF <- multi_EVPI(mc = mcSimulation_table_hail,
 evpi_AF
 
 plot_evpi(evpi_AF, decision_vars = "NPV_decision")
-
-
 
