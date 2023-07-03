@@ -1,7 +1,7 @@
 ---
-title: "Decision analysis of Rubber and Black pepper agroforestry in Nepal"
-author: "[Norina], Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, DOrcas Sanginga"
-date: "`r Sys.Date()`"
+title: "Improving smallholder revenue through intercropping rubber and black pepper: A case study of Nepal"
+author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
+date: "2023-07-14"
 output: bookdown::html_document2:
       theme: cerulean
       toc: true
@@ -24,16 +24,16 @@ library(DiagrammeR)
 ```
 
 
-# HowTo: Croff-References of Tables anf Figures
+# HowTo: Croff-References of Tables and Figures
 1. Copy the BibTex code of the reference into the bib/references textfile in the repository
-2. insert the ```{asis, echo=FALSE}``` opton in in the r-chunk where you want to cite (see example below).
+2. insert the ```{asis, echo=FALSE}``` option in the r-chunk where you want to cite (see example below).
 3. Citation: see example
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 For citing: Figure - \@ref(fig:name) , Table - \@ref(tab:table)
 
-i.e. \@ref(tab:inputtable)
+i.e. \@ref(tab:input table)
 
 
 # HowTo: References 
@@ -64,8 +64,9 @@ input_estimates = subset(input_estimates, select = -c(median))
 kable(input_estimates[2:7])
 ``` 
 
-Since Black Pepper grows best within moist climate, it's cultivation usually requires irrigation. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter. Thereby, especially the wintermonths are crucial to archieve high yields and often, Pepper plants need to be irrigated. _[This knowledge was obtained by a fast literature research, Aditi and Team Report can you correct false facts if you humble over such? - Heidi]_ 
+Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter. Thereby, especially the winter months are crucial to achieve high yields, and often, Pepper plants need to be irrigated. _[This knowledge was obtained by a fast literature research, Aditi and Team Report can you correct false facts if you humble over such? - Heidi]_ 
 We assumed that growing Black Pepper next to Rubber trees could either mitigate irrigation requirements as the rubber's shadow would increase the moisture, or amplify them as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
+Additionally, it is reported that litterfall releases high amounts of primary macronutrients such as Nitrogen, Phosphorous, and potassium (NPK) back into the soil. Estimating how much each system recycles will help to determine the profitability and sustainability of the studied systems in regard to nutrient cycling and minimize fertilization inputs in the following cropping systems.
 
 ## Code
 
@@ -90,17 +91,20 @@ str(table) # check whether reading data was successful
 model_function <- function() {
 
   ##Natural benefits ----
-  ##enhanced nutrient cycle
-  mono_nutrient <- vv(var_mean = mono_nutrient,
+  ##Nutrient accession (from litterfall)
+
+mono_nutrient <- vv(var_mean = mono_nutrient,
                             var_CV = var_mono_nutrient,
-                            n = n_years) * mono_nutrient_saved
-  mono_nutrient_saved <- mono_nutrient
-  
-  AF_nutrient <- vv(var_mean = AF_nutrient,
+                            n = n_years) 
+
+mono_nutrient_saved <- mono_nutrient* fertilizer_price  #Monetary value of fertilizer bags saved in rubber monoculture
+
+AF_nutrient <- vv(var_mean = AF_nutrient,
                             var_CV = var_AF_nutrient,
                             n = n_years)
-  AF_nutrient_saved <- AF_nutrient * AF_nutrient_saved
-  
+
+AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of fertilizer bags saved in rubber and pepper system  
+
 
   ## Yields----
   # Scenarios
@@ -215,7 +219,6 @@ plot_evpi(AF_evpi, decision_vars = "NPV_decision")
 ```
 
 
-## Cashflow??
 
 
 
