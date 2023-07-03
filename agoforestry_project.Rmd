@@ -1,7 +1,7 @@
 ---
 title: "Improving smallholder revenue through intercropping rubber and black pepper: A case study of Nepal"
 author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
-date: "2023-07-14"
+date: "2023-07-03"
 output: bookdown::html_document2:
       theme: cerulean
       toc: true
@@ -97,13 +97,13 @@ mono_nutrient <- vv(var_mean = mono_nutrient,
                             var_CV = var_mono_nutrient,
                             n = n_years) 
 
-mono_nutrient_saved <- mono_nutrient* fertilizer_price  #Monetary value of fertilizer bags saved in rubber monoculture
+mono_nutrient_saved <- mono_nutrient* fertilizer_price  #Monetary value of NPK fertilizer bags saved in rubber monoculture
 
 AF_nutrient <- vv(var_mean = AF_nutrient,
                             var_CV = var_AF_nutrient,
                             n = n_years)
 
-AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of fertilizer bags saved in rubber and pepper system  
+AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fertilizer bags saved in rubber and pepper system  
 
 
   ## Yields----
