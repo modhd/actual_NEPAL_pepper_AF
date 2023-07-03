@@ -14,10 +14,9 @@ rubber_price;140000;NA;200000;posnorm;NPR/t/ha;Price of a rubber per tonnes
 pepper_price;80000;NA;150000;posnorm;NPR/t/ha;Price of pepper per tonne
 mono_nutrient;2;NA;6;posnorm;NPR/ha*a;Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in rubber monoculture
 var_mono_nutrient;0.1;NA;0.2;posnorm;%;The variance in number of NPK fertilizer bags in monoculture
-mono_nutrient_saved;21625;NA;64872;posnorm;NPR/ha;Monetary value of the number of NPK bags saved in rubber monoculture
 AF_nutrient;4;NA;10;posnorm;NPR/ha*a;Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in Rubber-black pepper AF
 var_AF_nutrient;0.1;NA;0.2;posnorm;%;The variance in number of NPK fertilizer bags in AF
-AF_nutrient_saved;43248;NA;108120;posnorm;NPR/ha;Monetary value of of the number of NPK bags saved in AF
+fertilizer_price;10812;NA;20000;posnorm;NPR/ha;Monetary value of a 50 kg NPK fertilizer bag
 cost_water;1450;NA;30000;posnorm;NPR/m^3;Monetary value of water saved through interception in rubber mono
 var_cost_water;5;NA;20;posnorm;%;Variance in water costs
 water_competition_probability;0.1;NA;0.3;tnorm_0_1;;The probability that roots will compete (higher irrigation costs and lower yields)
