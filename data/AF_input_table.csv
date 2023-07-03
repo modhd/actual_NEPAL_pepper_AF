@@ -1,0 +1,29 @@
+variables;lower ;median;upper;distribution;label;description
+n_years;25;NA;25;const;years;The time span that is modeled
+establishment_cost_mono;100000;NA;1000000;posnorm;NPR/ha*a;Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals ~144000 NPR)
+establishment_cost_AF;145000;NA;1500000;posnorm;NPR/ha*a;Cost of rubber and pepper establishment in Nepalese rupee/ha
+rubber_main_cost;20000;NA;100000;posnorm;NPR/ha*a;Cost to maintain rubber system (million NPR/year)
+var_rubber_main_cost;5;NA;15;posnorm;%;The variance in rubber maintenance cost 
+pepper_main_cost;10000;NA;250000;posnorm;NPR/ha*a;Annual cost to maintain black pepper system (million NPR/year)
+var_pepper_main_cost;5;NA;15;posnorm;%;The variance in pepper maintenance cost 
+max_pepper_yield;50;NA;280;posnorm;NPR/ha*a;The peak yield of pepper (t/ha)
+var_pepper_yield;5;NA;10;posnorm;%;The variance in pepper yield 
+max_rubber_yield;100;NA;450;posnorm;NPR/ha*a;The peak yield of rubber
+var_rubber_yield;10;NA;20;posnorm;%;The variance in rubber yield 
+rubber_price;140000;NA;200000;posnorm;NPR/t/ha;Price of a rubber per tonnes 
+pepper_price;80000;NA;150000;posnorm;NPR/t/ha;Price of pepper per tonne
+mono_nutrient;2;NA;6;posnorm;NPR/ha*a;Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in rubber monoculture
+var_mono_nutrient;0.1;NA;0.2;posnorm;%;The variance in number of NPK fertilizer bags in monoculture
+AF_nutrient;4;NA;10;posnorm;NPR/ha*a;Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in Rubber-black pepper AF
+var_AF_nutrient;0.1;NA;0.2;posnorm;%;The variance in number of NPK fertilizer bags in AF
+fertilizer_price;10812;NA;20000;posnorm;NPR/ha;Monetary value of a 50 kg NPK fertilizer bag
+cost_water;1450;NA;30000;posnorm;NPR/m^3;Monetary value of water saved through interception in rubber mono
+var_cost_water;5;NA;20;posnorm;%;Variance in water costs
+water_competition_probability;0.1;NA;0.3;tnorm_0_1;;The probability that roots will compete (higher irrigation costs and lower yields)
+yield_if_competition;0.3;NA;0.5;posnorm;;Estimated yield loss in case of competition to water compared to well watered plants
+var_yield_if_competition;0.1;NA;0.2;posnorm;;
+var_AF_water;5;NA;30;posnorm;m^3/ha*a ;The variance in water saved in interception in rubber mono
+mean_AF_water;600;NA;2500;posnorm;m^3/ha*a ;
+competition_AF_water;1200;NA;3100;posnorm;m^3/ha*a ;"plus 600 compared to ""usual"" need"
+knowledge_gap_probability;0.2;NA;0.4;tnorm_0_1;;Percentual estimation of knowledge gaps to manage and yield the pepper 
+var_knowledge_gap_probability;0.01;NA;0.02;posnorm;;Variation

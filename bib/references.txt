@@ -1,0 +1,66 @@
+
+@article{doDecisionAnalysisAgroforestry2020,
+	title = {Decision analysis of agroforestry options reveals adoption risks for resource-poor farmers},
+	volume = {40},
+	issn = {1774-0746, 1773-0155},
+	url = {https://link.springer.com/10.1007/s13593-020-00624-5},
+	doi = {10.1007/s13593-020-00624-5},
+	language = {en},
+	number = {3},
+	urldate = {2023-06-06},
+	journal = {Agronomy for Sustainable Development},
+	author = {Do, Hoa and Luedeling, Eike and Whitney, Cory},
+	month = jun,
+	year = {2020},
+	pages = {20},
+}
+
+@article{oliosiMicroclimateDevelopmentBlack2021,
+	title = {Microclimate and development of black pepper intercropped with rubber tree},
+	volume = {95},
+	issn = {0167-4366, 1572-9680},
+	url = {https://link.springer.com/10.1007/s10457-021-00674-y},
+	doi = {10.1007/s10457-021-00674-y},
+	language = {en},
+	number = {8},
+	urldate = {2023-06-27},
+	journal = {Agroforestry Systems},
+	author = {Oliosi, Gleison and Oliveira, Marcos Góes and Partelli, Fabio Luiz},
+	month = dec,
+	year = {2021},
+	pages = {1635--1645},
+}
+
+@misc{faoPepperCropInformation,
+	title = {Pepper - Crop information},
+	url = {https://www.fao.org/land-water/databases-and-software/crop-information/pepper/en/},
+	urldate = {2023-06-27},
+	journal = {Land \& Water - Databases and Software},
+	author = {{FAO}},
+}
+
+@article{kumagaiHowRubberHevea2015,
+	title = {How do rubber Hevea brasiliensis plantations behave under seasonal water stress in northeastern Thailand and central Cambodia?},
+	volume = {213},
+	issn = {0168-1923},
+	url = {https://www.sciencedirect.com/science/article/pii/S0168192315001902},
+	doi = {10.1016/j.agrformet.2015.06.011},
+	language = {en},
+	urldate = {2023-07-02},
+	journal = {Agricultural and Forest Meteorology},
+	author = {Kumagai, Tomo’omi and Mudd, Ryan G. and Giambelluca, Thomas W. and Kobayashi, Nakako and Miyazawa, Yoshiyuki and Lim, Tiva Khan and Liu, Wen and Huang, Maoyi and Fox, Jefferson M. and Ziegler, Alan D. and Yin, Song and Mak, Sophea Veasna and Kasemsap, Poonpipope},
+	month = nov,
+	year = {2015},
+	keywords = {Eddy covariance, Soil moisture, Stomatal control, Transpiration, Tropical deciduous trees, Water vapor flux},
+	pages = {10--22},
+	}
+
+
+@online{WorldBankClimate,
+  title = {World {{Bank Climate Change Knowledge Portal}}},
+  url = {https://climateknowledgeportal.worldbank.org/},
+  urldate = {2023-07-02},
+  abstract = {The Climate Change Knowledge Portal (CCKP) provides global data on historical and future climate, vulnerabilities, and impacts.},
+  langid = {english}
+}
+

@@ -1,0 +1,224 @@
+---
+title: "Improving smallholder revenue through intercropping rubber and black pepper: A case study of Nepal"
+author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
+date: "2023-07-03"
+output: bookdown::html_document2:
+      theme: cerulean
+      toc: true
+      toc_float: true
+      toc_depth: 2
+      number_sections: true
+      number_figures: true
+
+bibliography: 
+  - bib/references.bib 
+  - bib/packages.bib
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(decisionSupport)
+library(DiagrammeR)
+```
+
+
+# HowTo: Croff-References of Tables and Figures
+1. Copy the BibTex code of the reference into the bib/references textfile in the repository
+2. insert the ```{asis, echo=FALSE}``` option in the r-chunk where you want to cite (see example below).
+3. Citation: see example
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+For citing: Figure - \@ref(fig:name) , Table - \@ref(tab:table)
+
+i.e. \@ref(tab:input table)
+
+
+# HowTo: References 
+In-text references: ```[@R-<shorturl as stated in the bibtex file>]``` i.e. The [@decisionSupport] package
+was used to conduct the MC simulation as well as the NPV and VoI calcutations.
+
+
+```{r, add_packages_bib, include=FALSE}
+knitr::write_bib(c(.packages(),
+                   'decisionSupport', 'DiagrammeR'), 'bib/packages.bib')
+
+```
+
+
+# Introduction
+
+# Methods
+
+## Input estimates
+
+```{r input_table, caption= "Input variables as used in the decision analysis.", echo=FALSE, warning=FALSE}
+library(knitr)
+options(scipen = 999)
+
+input_estimates <- read.csv("./data/AF_input_table.csv", header = TRUE, sep = ";")
+
+input_estimates = subset(input_estimates, select = -c(median))
+kable(input_estimates[2:7])
+``` 
+
+Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter. Thereby, especially the winter months are crucial to achieve high yields, and often, Pepper plants need to be irrigated. _[This knowledge was obtained by a fast literature research, Aditi and Team Report can you correct false facts if you humble over such? - Heidi]_ 
+We assumed that growing Black Pepper next to Rubber trees could either mitigate irrigation requirements as the rubber's shadow would increase the moisture, or amplify them as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
+Additionally, it is reported that litterfall releases high amounts of primary macronutrients such as Nitrogen, Phosphorous, and potassium (NPK) back into the soil. Estimating how much each system recycles will help to determine the profitability and sustainability of the studied systems in regard to nutrient cycling and minimize fertilization inputs in the following cropping systems.
+
+## Code
+
+### Variating variables
+Every variable calculated with vv() function.
+
+### Chance events
+Every variable calulated with chance_event().
+
+### Model function, NPV and EVPI calculation
+
+```{r, echo=T, warning=F}
+library(decisionSupport)
+
+# Read data----
+table <- read.csv("./data/AF_input_table.csv", sep = ";")
+str(table) # check whether reading data was successful
+
+
+# Model function----
+
+model_function <- function() {
+
+  ##Natural benefits ----
+  ##Nutrient accession (from litterfall)
+
+mono_nutrient <- vv(var_mean = mono_nutrient,
+                            var_CV = var_mono_nutrient,
+                            n = n_years) 
+
+mono_nutrient_saved <- mono_nutrient* fertilizer_price  #Monetary value of NPK fertilizer bags saved in rubber monoculture
+
+AF_nutrient <- vv(var_mean = AF_nutrient,
+                            var_CV = var_AF_nutrient,
+                            n = n_years)
+
+AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fertilizer bags saved in rubber and pepper system  
+
+
+  ## Yields----
+  # Scenarios
+  ### As it is not known yet, the moist microclimate underneath the rubber trees can result in higher 
+  ### pepper yields or, on the other hand, competition of the roots might lead to lower yields of both crops
+  water_competition <- chance_event(water_competition_probability, value_if = 1, value_if_not = 0)
+  
+  ### Account for risk in diminished yields due to knowledge gaps especially at the initial phase
+  ### and risk of knowledge gaps that could also lead to lower yields
+  management_errors <- vv(var_mean = knowledge_gap_probability, var_CV = var_knowledge_gap_probability,
+                          n = n_years, relative_trend = - 10)
+  
+  # Yield incomes
+  rubber_yield <- vv(var_mean = max_rubber_yield, var_CV = var_rubber_yield, n = n_years)
+  rubber_yield <- rubber_yield * (1 - management_errors) * (1 - water_competition * yield_if_competition)
+  rubber_income <- rubber_yield * rubber_price
+    
+  pepper_yield <- vv(var_mean = max_pepper_yield, var_CV = var_pepper_yield, n = n_years)
+  pepper_yield <- pepper_yield * (1 - management_errors)* (1 - water_competition * yield_if_competition)
+  pepper_income <- pepper_yield * pepper_price
+  
+
+  ## Summarize benefits
+  rubber_benefit <- rubber_income + mono_nutrient_saved
+  AF_benefit <- pepper_income + rubber_income + AF_nutrient_saved
+  
+
+  ## Costs----
+  ### Establishment costs in 1rst year
+  establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years))
+  establistment_cost_AF <- c(establishment_cost_AF, rep(0, n_years))
+  
+  maintenance_cost_mono <- vv(var_mean = rubber_main_cost, var_CV = var_rubber_main_cost,
+                              n = n_years)
+  maintenance_cost_pepper <- vv(var_mean = pepper_main_cost, var_CV = var_pepper_main_cost,
+                              n = n_years)
+  
+  
+  ### Water costs
+  ### pepper needs to be irrigated which is an addition cost.
+  price_water <- vv(cost_water, var_cost_water, n_years)
+  
+  if (water_competition) {
+    AF_water <- vv(mean_AF_water, var_AF_water, n_years)
+  } else {
+    AF_water <- vv(competition_AF_water, var_AF_water, n_years)
+  }
+    
+  cost_AF_water <- AF_water * price_water
+  
+  
+  ## Substracting the costs to get final benefits----
+  final_income_mono <- rubber_benefit - (maintenance_cost_mono + establishment_cost_mono)
+    
+  ### AF
+  final_income_AF <- AF_benefit + rubber_benefit - (establishment_cost_AF + maintenance_cost_pepper
+                                                   + maintenance_cost_mono + cost_AF_water)
+
+  ### discount rate
+  NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)
+  NPV_AF <- discount(final_income_AF, discount_rate = 10, calculate_NPV = TRUE)
+  
+  ## Overall NPV of the decision ----
+  NPV_decision <- NPV_AF - NPV_mono
+  
+  return(list(NPV_mono =  NPV_mono,
+              NPV_AF =  NPV_AF, 
+              NPV_decision = NPV_decision))
+  
+  }
+
+
+# Montecarlo Simulation----
+AF_mc_simulation <- mcSimulation(as.estimate(table),
+                                         model_function = model_function,
+                                         numberOfModelRuns = 200,
+                                         functionSyntax = "plainNames")
+write.csv(AF_mc_simulation, "./results/1_MC_simulation_reuslts.csv")
+
+# VoI ----
+mcSimulation_table <- data.frame(AF_mc_simulation$x, 
+                                      AF_mc_simulation$y[3])
+mcSimulation_table
+
+AF_evpi <- multi_EVPI(mc = mcSimulation_table, 
+                        first_out_var = "NPV_decision")
+AF_evpi
+write.csv(AF_evpi, "./results/2_evpi_results.csv")
+
+```
+
+# Results and discussion
+
+## Net Present Value (NPV) distributions
+
+```{r NPVs, echo=F, fig.align='center', fig.cap="Difference in NPV between Agroforestry system and Rubber monoculture."}
+plot_distributions(mcSimulation_object = AF_mc_simulation,
+                   vars = c("NPV_mono" , "NPV_AF"),
+                   method = 'smooth_simple_overlay',
+                   base_size= 11)
+
+```
+
+
+## Value of Information (VoI) analysis
+
+```{r VoI, echo=F, fig.align='center', fig.cap="Results of the Value of Information analysis."}
+
+#if you want to reference to this fig, use \@ref(fig:VoI)
+
+plot_evpi(AF_evpi, decision_vars = "NPV_decision")
+```
+
+
+
+
+
