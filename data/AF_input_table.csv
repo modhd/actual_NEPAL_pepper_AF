@@ -1,4 +1,4 @@
-variables;lower ;median;upper;distribution;label;description
+variable;lower ;median;upper;distribution;label;description
 n_years;25;NA;25;const;years;The time span that is modeled
 establishment_cost_mono;100000;NA;1000000;posnorm;NPR/ha*a;Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals ~144000 NPR)
 establishment_cost_AF;145000;NA;1500000;posnorm;NPR/ha*a;Cost of rubber and pepper establishment in Nepalese rupee/ha

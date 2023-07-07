@@ -87,8 +87,8 @@ options(scipen = 999)
 
 input_estimates <- read.csv("./data/AF_input_table.csv", header = TRUE, sep = ";")
 
-input_estimates = subset(input_estimates, select = -c(median))
-kable(input_estimates[2:7])
+##input_estimates = subset(input_estimates, select = -c(median))
+#kable(input_estimates[2:7])
 ``` 
 
 Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter. Thereby, especially the winter months are crucial to achieve high yields, and often, Pepper plants need to be irrigated. _[This knowledge was obtained by a fast literature research, Aditi and Team Report can you correct false facts if you humble over such? - Heidi]_ 
@@ -101,9 +101,9 @@ Additionally, it is reported that litterfall releases high amounts of primary ma
 Every variable calculated with vv() function.
 
 ### Chance events
-Every variable calulated with chance_event().
+Water variable calculated with chance_event().
 
-### Model function, NPV and EVPI calculation
+### Model function
 
 ```{r, echo=T, warning=F}
 library(decisionSupport)
@@ -115,7 +115,7 @@ str(table) # check whether reading data was successful
 
 # Model function----
 
-model_function <- function() {
+system_benefit <- function(x, varnames) {
 
   ##Natural benefits ----
   ##Nutrient accession (from litterfall)
@@ -160,7 +160,7 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
   
 
   ## Costs----
-  ### Establishment costs in 1rst year
+  ### Establishment costs in first year
   establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years))
   establistment_cost_AF <- c(establishment_cost_AF, rep(0, n_years))
   
@@ -184,34 +184,72 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
   
   
   ## Substracting the costs to get final benefits----
+  
+  ###Mono rubber final benefits
   final_income_mono <- rubber_benefit - (maintenance_cost_mono + establishment_cost_mono)
     
-  ### AF
-  final_income_AF <- AF_benefit + rubber_benefit - (establishment_cost_AF + maintenance_cost_pepper
+  ### Rubber intercropping final benefits
+  final_income_AF <- AF_benefit - (establishment_cost_AF + maintenance_cost_pepper
                                                    + maintenance_cost_mono + cost_AF_water)
 
-  ### discount rate
-  NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)
-  NPV_AF <- discount(final_income_AF, discount_rate = 10, calculate_NPV = TRUE)
-  
-  ## Overall NPV of the decision ----
-  NPV_decision <- NPV_AF - NPV_mono
-  
-  return(list(NPV_mono =  NPV_mono,
-              NPV_AF =  NPV_AF, 
-              NPV_decision = NPV_decision))
-  
-  }
+  ###Trade off benefits and cashflow
+tradeoff_benefit <- final_income_AF - final_income_mono
 
+cashflow <- discount(final_income_AF, discount_rate = 10, calculate_NPV = FALSE)
 
+cum_cashflow <- cumsum(cashflow)
+
+  ### NPV 
+NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)
+
+NPV_tradeoff <- discount(tradeoff_benefit, discount_rate = 10, calculate_NPV = TRUE)
+  
+NPV_AF <- discount(final_income_AF, discount_rate = 10, calculate_NPV = TRUE)
+  
+  return(list(cashflow= cum_cashflow,trade_off= NPV_tradeoff,
+              NPV_rubber= NPV_mono, NPV_AF= NPV_AF))
+}
+
+```
+
+### NPV and EVPI calculation
+
+``` {r}
 # Montecarlo Simulation----
+decisionSupport(inputFilePath = paste("data/AF_input_table.csv", sep = ","),
+outputPath= paste("results/montecarlo_results", sep= ","),
+write_table= TRUE,
+welfareFunction = system_benefit,
+numberOfModelRuns = 200,
+functionSyntax = "plainNames")
+
+#This is the montecarlo that is bringing error variable not found
+
+
+#Old Montercarlo trial 
 AF_mc_simulation <- mcSimulation(as.estimate(table),
-                                         model_function = model_function,
+                                         model_function = system_benefit,
                                          numberOfModelRuns = 200,
                                          functionSyntax = "plainNames")
-write.csv(AF_mc_simulation, "./results/1_MC_simulation_reuslts.csv")
+write.csv(AF_mc_simulation, "./results/1_MC_simulation_results.csv")
+
+
 
 # VoI ----
+Mcall <- read.table(file= "./results/1_MC_simulation_results.csv",
+                    header = TRUE, sep = ",")
+
+mc <- Mcall[, c(27:57)] 
+
+evpi <- multi_EVPI(mc, "y.trade_off", write_table = TRUE)
+
+evpi
+
+write.csv(evpi, "./results/evpi_results.csv")
+
+
+
+#OLD VOI trial
 mcSimulation_table <- data.frame(AF_mc_simulation$x, 
                                       AF_mc_simulation$y[3])
 mcSimulation_table
@@ -229,8 +267,9 @@ write.csv(AF_evpi, "./results/2_evpi_results.csv")
 
 ```{r NPVs, echo=F, fig.align='center', fig.cap="Difference in NPV between Agroforestry system and Rubber monoculture."}
 plot_distributions(mcSimulation_object = AF_mc_simulation,
-                   vars = c("NPV_mono" , "NPV_AF"),
+                   vars = c("NPV_mono", "NPV_AF"),
                    method = 'smooth_simple_overlay',
+                   colors = c("#0000FF","#F0E442"),
                    base_size= 11)
 
 ```
@@ -242,10 +281,23 @@ plot_distributions(mcSimulation_object = AF_mc_simulation,
 
 #if you want to reference to this fig, use \@ref(fig:VoI)
 
-plot_evpi(AF_evpi, decision_vars = "NPV_decision")
+plot_evpi(evpi, decision_vars= c("y.NPV_rubber", "y.NPV_AF"))
+```
+
+
+##Compound figures trial
+
+```{r}
+compound_figure(model = system_benefit, 
+input_table = table, 
+decision_var_name = "NPV_tradeoff",
+cashflow_var_name = "cum_cash_flow",
+model_runs = 200,
+distribution_method = 'smooth_simple_overlay')
 ```
 
 # Uncertainties and Issues
+
 
 # Conclusion
 
