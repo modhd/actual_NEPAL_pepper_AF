@@ -1,7 +1,7 @@
 ---
 title: "Improving smallholder farmers' income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
 author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
-date: "2023-07-05"
+date: "2023-07-08"
 output: bookdown::html_document2:
       theme: cerulean
       toc: true
@@ -195,16 +195,16 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
   ###Trade off benefits and cashflow
 tradeoff_benefit <- final_income_AF - final_income_mono
 
-cashflow <- discount(final_income_AF, discount_rate = 10, calculate_NPV = FALSE)
+cashflow <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = FALSE)
 
 cum_cashflow <- cumsum(cashflow)
 
   ### NPV 
-NPV_mono <- discount(final_income_mono, discount_rate = 10, calculate_NPV = TRUE)
+NPV_mono <- discount(final_income_mono, discount_rate = discount_rate, calculate_NPV = TRUE)
 
-NPV_tradeoff <- discount(tradeoff_benefit, discount_rate = 10, calculate_NPV = TRUE)
+NPV_tradeoff <- discount(tradeoff_benefit, discount_rate = discount_rate, calculate_NPV = TRUE)
   
-NPV_AF <- discount(final_income_AF, discount_rate = 10, calculate_NPV = TRUE)
+NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = TRUE)
   
   return(list(cashflow= cum_cashflow,trade_off= NPV_tradeoff,
               NPV_rubber= NPV_mono, NPV_AF= NPV_AF))
@@ -212,21 +212,12 @@ NPV_AF <- discount(final_income_AF, discount_rate = 10, calculate_NPV = TRUE)
 
 ```
 
-### NPV and EVPI calculation
+
+# Results and Discussion
 
 ``` {r}
-# Montecarlo Simulation----
-decisionSupport(inputFilePath = paste("data/AF_input_table.csv", sep = ","),
-outputPath= paste("results/montecarlo_results", sep= ","),
-write_table= TRUE,
-welfareFunction = system_benefit,
-numberOfModelRuns = 200,
-functionSyntax = "plainNames")
 
-#This is the montecarlo that is bringing error variable not found
-
-
-#Old Montercarlo trial 
+## Monte Carlo Simulation 
 AF_mc_simulation <- mcSimulation(as.estimate(table),
                                          model_function = system_benefit,
                                          numberOfModelRuns = 200,
@@ -234,69 +225,96 @@ AF_mc_simulation <- mcSimulation(as.estimate(table),
 write.csv(AF_mc_simulation, "./results/1_MC_simulation_results.csv")
 
 
-
-# VoI ----
-Mcall <- read.table(file= "./results/1_MC_simulation_results.csv",
-                    header = TRUE, sep = ",")
-
-mc <- Mcall[, c(27:57)] 
-
-evpi <- multi_EVPI(mc, "y.trade_off", write_table = TRUE)
-
-evpi
-
-write.csv(evpi, "./results/evpi_results.csv")
-
-
-
-#OLD VOI trial
-mcSimulation_table <- data.frame(AF_mc_simulation$x, 
-                                      AF_mc_simulation$y[3])
-mcSimulation_table
-
-AF_evpi <- multi_EVPI(mc = mcSimulation_table, 
-                        first_out_var = "NPV_decision")
-AF_evpi
-write.csv(AF_evpi, "./results/2_evpi_results.csv")
-
-```
-
-# Results and discussion
-
-## Net Present Value (NPV) distributions
-
-```{r NPVs, echo=F, fig.align='center', fig.cap="Difference in NPV between Agroforestry system and Rubber monoculture."}
+## NPV distribution 
 plot_distributions(mcSimulation_object = AF_mc_simulation,
-                   vars = c("NPV_mono", "NPV_AF"),
-                   method = 'smooth_simple_overlay',
-                   colors = c("#0000FF","#F0E442"),
-                   base_size= 11)
+                  vars = c("NPV_rubber", "NPV_AF"),
+                  method = 'smooth_simple_overlay',
+                  colors = c("#0000FF","#F0E442"),
+                  base_size = 11)
+
+```
+
+## Cashflow analysis
+```{r}
+cashflow <- plot_cashflow(mcSimulation_object = AF_mc_simulation,
+                          cashflow_var_name = "cashflow",
+                          x_axis_name = "Years",
+                          y_axis_name = "Cashflow in Nepali Rupee",
+                          color_25_75 = "grey",
+                          color_5_95 = "yellow",
+                          color_median= "red",
+                          base= 15)
+
+cashflow
+
+```
+
+### Sensitivity analysis
+#TO BE CORRECTED DUE TO LABEL PROBLEM
+
+```{r}
+#To get names of y and x 
+names(AF_mc_simulation$x)
+names(AF_mc_simulation$y)
+
+#VIP scores
+pls_results <- plsr.mcSimulation(object = AF_mc_simulation,
+                                 resultName = "NPV_AF",
+                                 ncomp = 1)
+
+plot_pls(pls_results, threshold = 0.8, input_table = input_estimates)
+
 
 ```
 
 
-## Value of Information (VoI) analysis
+## Expected value of perfect information EVPI with recommendation
 
-```{r VoI, echo=F, fig.align='center', fig.cap="Results of the Value of Information analysis."}
+```{r}
+mcresults_table <- data.frame(AF_mc_simulation$x,
+                                 AF_mc_simulation$y[26:28])
 
-#if you want to reference to this fig, use \@ref(fig:VoI)
+evpi <- multi_EVPI(mc = mcresults_table, 
+                 "NPV_AF")
+summary(evpi)
+plot(evpi, "NPV_AF")
 
-plot_evpi(evpi, decision_vars= c("y.NPV_rubber", "y.NPV_AF"))
 ```
 
+#EVPI without information
+```{r}
+mcresults_table <- data.frame(AF_mc_simulation$x,
+                          AF_mc_simulation$y[26:28])
+
+evpi<- multi_EVPI(mc= mcresults_table,
+                  first_out_var = "trade_off", write_table = FALSE, outfolder = ./results/evpi_results)
+
+
+plot_evpi<-plot_evpi(evpi,
+          decision_vars = "NPV_AF",
+          new_names= "Rubber and Black pepper",
+          unit= "NPR",
+          bar_color= "yellow4",
+          base_size=15)
+
+plot_evpi
+
+```
 
 ##Compound figures trial
+#TO BE CORRECTED DUE TO LABEL NAME
 
 ```{r}
 compound_figure(model = system_benefit, 
 input_table = table, 
-decision_var_name = "NPV_tradeoff",
-cashflow_var_name = "cum_cash_flow",
+decision_var_name = "NPV_AF",
+cashflow_var_name = "cashflow",
 model_runs = 200,
 distribution_method = 'smooth_simple_overlay')
 ```
 
 # Uncertainties and Issues
+
 
 
 # Conclusion
