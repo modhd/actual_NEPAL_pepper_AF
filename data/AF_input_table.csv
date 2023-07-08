@@ -1,6 +1,6 @@
 variable;lower ;median;upper;distribution;label;description
 n_years;25;NA;25;const;years;The time span that is modeled
-discount_rate;10;NA;10;const; Discount rate 
+discount_rate;10;NA;10;const;%;Discount rate 
 establishment_cost_mono;100000;NA;1000000;posnorm;NPR/ha*a;Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals ~144000 NPR)
 establishment_cost_AF;145000;NA;1500000;posnorm;NPR/ha*a;Cost of rubber and pepper establishment in Nepalese rupee/ha
 rubber_main_cost;20000;NA;100000;posnorm;NPR/ha*a;Cost to maintain rubber system (million NPR/year)
@@ -28,3 +28,9 @@ mean_AF_water;600;NA;2500;posnorm;m^3/ha*a ;Mean of water
 competition_AF_water;1200;NA;3100;posnorm;m^3/ha*a ;"plus 600 compared to ""usual"" need"
 knowledge_gap_probability;0.2;NA;0.4;tnorm_0_1;%;Percentual estimation of knowledge gaps to manage and yield the pepper 
 var_knowledge_gap_probability;0.01;NA;0.02;posnorm;%;Variation
+var_yield_if_competition;0.1;NA;0.2;posnorm;%;variation in yield if water competition
+var_AF_water;5;NA;30;posnorm;m^3/ha*a ;The variance in water saved in interception in rubber mono
+mean_AF_water;600;NA;2500;posnorm;m^3/ha*a ; water saved in AF
+competition_AF_water;1200;NA;3100;posnorm;m^3/ha*a ;"plus 600 compared to ""usual"" need"
+knowledge_gap_probability;0.2;NA;0.4;tnorm_0_1;%;Percentual estimation of knowledge gaps to manage and yield the pepper 
+var_knowledge_gap_probability;0.01;NA;0.02;posnorm;%;Variation in knowledge gap
