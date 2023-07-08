@@ -250,7 +250,6 @@ cashflow
 ```
 
 ### Sensitivity analysis
-#TO BE CORRECTED DUE TO LABEL PROBLEM
 
 ```{r}
 #To get names of y and x 
@@ -281,7 +280,8 @@ plot(evpi, "NPV_AF")
 
 ```
 
-#EVPI without information
+#EVPI without recommendation
+
 ```{r}
 mcresults_table <- data.frame(AF_mc_simulation$x,
                           AF_mc_simulation$y[26:28])
@@ -301,8 +301,7 @@ plot_evpi
 
 ```
 
-##Compound figures trial
-#TO BE CORRECTED DUE TO LABEL NAME
+##Compound figures
 
 ```{r}
 compound_figure(model = system_benefit, 
