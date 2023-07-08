@@ -28,9 +28,3 @@ mean_AF_water;600;NA;2500;posnorm;m^3/ha*a ;Mean of water
 competition_AF_water;1200;NA;3100;posnorm;m^3/ha*a ;"plus 600 compared to ""usual"" need"
 knowledge_gap_probability;0.2;NA;0.4;tnorm_0_1;%;Percentual estimation of knowledge gaps to manage and yield the pepper 
 var_knowledge_gap_probability;0.01;NA;0.02;posnorm;%;Variation
-var_yield_if_competition;0.1;NA;0.2;posnorm;%;variation in yield if water competition
-var_AF_water;5;NA;30;posnorm;m^3/ha*a ;The variance in water saved in interception in rubber mono
-mean_AF_water;600;NA;2500;posnorm;m^3/ha*a ; water saved in AF
-competition_AF_water;1200;NA;3100;posnorm;m^3/ha*a ;"plus 600 compared to ""usual"" need"
-knowledge_gap_probability;0.2;NA;0.4;tnorm_0_1;%;Percentual estimation of knowledge gaps to manage and yield the pepper 
-var_knowledge_gap_probability;0.01;NA;0.02;posnorm;%;Variation in knowledge gap
