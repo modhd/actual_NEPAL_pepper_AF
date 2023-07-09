@@ -1,7 +1,7 @@
 ---
 title: "Improving smallholder farmers' income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
 author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
-date: "2023-07-08"
+date: "2023-07-09"
 output: bookdown::html_document2:
       theme: cerulean
       toc: true
@@ -54,13 +54,13 @@ Rubber plant (Hevea brasiliensis) is a perennial crop and the natural source of 
 Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees, utilizing the vertical space and reducing weed competition [REFERENCE]. Rubber trees, on the other hand, benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth [REFERENCE].
 Nepal, being a country known for its diverse agro-climatic conditions, offers a favorable environment for intercropping rubber with black pepper, a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
 
-# Current Situation of Rubber Production in Nepal
+## Current Situation of Rubber Production in Nepal
 Nepal's climate and land slope make natural rubber cultivation ideal for addressing issues such as underemployment, underutilization of land, and poverty. However, rubber monocropping poses several challenges for farmers, including a lack of income during the long immature period, vulnerability to price shocks, seasonality, disease outbreaks, and natural disaster (DERAF report, 2020). There is a high level of rubber and pepper imports because of tight supply conditions in Nepal (Economic times, 2020). To overcome these obstacles there is a need to promoting rubber agroforestry practices especially with compatible and mutual beneficial crop species. 
 
-# Why Rubber and Black Pepper Agroforestry system
+## Why Rubber and Black Pepper Agroforestry system
 Integrating black pepper and Rubber in an agroforestry system can offer a solution to improve food security, increase farmers' income, and enhance their livelihoods (Rahman et al., 2012). Intercropping rubber with black pepper enables smallholders to diversify their income sources and optimize land utilization during the initial six years it takes for rubber trees to become productive (Pepper Hub-- YEAR). Additionally, shading black pepper with rubber trees creates favorable growth conditions, including decreased irradiance and temperature, increased relative humidity, and higher leaf expansion, demonstrating adaptation to low light (Oleosio et al., 2021).
 
-# Decision Problem
+## Decision Problem
 To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as;
 1. Economic Impact: This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities. 
 2. Risk and Resilience: focuses on assessing the vulnerability of rubber intercropping systems to price shocks, disease outbreaks, natural disasters, and other risks, while identifying strategies to mitigate them. 
@@ -68,10 +68,10 @@ To improve income and the livelihoods of farmers in Nepal farmers might want to 
 4. Cost-Benefit Analysis: This focuses on a comprehensive cost-benefit analysis, comparing the economic, environmental, and social benefits of rubber intercropping systems with rubber monocropping.
 5. Technical knowledge and support: This considers whether farmers have access to technical knowledge and support. This includes understanding the agronomic practices, pest and disease management, harvesting, processing, and marketing strategies for both crops. Training programs, extension services, and collaboration with agricultural experts can help address these knowledge gaps.
 
-# Decision Maker
+## Decision Maker
 The decision makers for this project are the smallholder rubber farmers in Jhapa, Nepal. The ultimate goal is to improve their income and livelihoods.
 
-# Decision Alternatives
+## Decision Alternatives
 1. Alternative 1: Promote Rubber monocropping 
 2. Alternative 2: Promote Rubber and Black Pepper intercropping
 
@@ -197,16 +197,16 @@ tradeoff_benefit <- final_income_AF - final_income_mono
 
 cashflow <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = FALSE)
 
-cum_cashflow <- cumsum(cashflow)
+cumul_cashflow <- cumsum(cashflow) #cumulative cashflow over 25 years
 
   ### NPV 
-NPV_mono <- discount(final_income_mono, discount_rate = discount_rate, calculate_NPV = TRUE)
+NPV_mono <- discount(final_income_mono, discount_rate = discount_rate, calculate_NPV = TRUE) #for rubber monoculture
 
-NPV_tradeoff <- discount(tradeoff_benefit, discount_rate = discount_rate, calculate_NPV = TRUE)
+NPV_tradeoff <- discount(tradeoff_benefit, discount_rate = discount_rate, calculate_NPV = TRUE) #for the decision 
   
-NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = TRUE)
+NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = TRUE) #for rubber and pepper
   
-  return(list(cashflow= cum_cashflow,trade_off= NPV_tradeoff,
+  return(list(cashflow= cumul_cashflow,trade_off= NPV_tradeoff,
               NPV_rubber= NPV_mono, NPV_AF= NPV_AF))
 }
 
@@ -222,67 +222,75 @@ AF_mc_simulation <- mcSimulation(as.estimate(table),
                                          model_function = system_benefit,
                                          numberOfModelRuns = 200,
                                          functionSyntax = "plainNames")
-write.csv(AF_mc_simulation, "./results/1_MC_simulation_results.csv")
+write.csv(AF_mc_simulation, "./results/mc_simulation_results.csv")
 
 
-## NPV distribution 
+## NPV distribution as histogram
 plot_distributions(mcSimulation_object = AF_mc_simulation,
                   vars = c("NPV_rubber", "NPV_AF"),
                   method = 'smooth_simple_overlay',
                   colors = c("#0000FF","#F0E442"),
-                  base_size = 11)
+                  base_size = 10)
+
+## NPV distribution as boxplot
+plot_distributions(mcSimulation_object = AF_mc_simulation,
+                  vars = c("NPV_rubber", "NPV_AF"),
+                  method = 'boxplot',
+                  colors = c("#0000FF","#F0E442"),
+                  base_size = 10)
+
+## Value of the decision 
+plot_distributions(mcSimulation_object = AF_mc_simulation,
+                  vars = "trade_off",
+                  method = 'boxplot',
+                  base_size = 10)
+
 
 ```
 
 ## Cashflow analysis
+
 ```{r}
 cashflow <- plot_cashflow(mcSimulation_object = AF_mc_simulation,
                           cashflow_var_name = "cashflow",
-                          x_axis_name = "Years",
+                          x_axis_name = "Years of intervention",
                           y_axis_name = "Cashflow in Nepali Rupee",
                           color_25_75 = "grey",
                           color_5_95 = "yellow",
                           color_median= "red",
-                          base= 15)
+                          base= 10)
 
 cashflow
 
 ```
 
-### Sensitivity analysis
+## Sensitivity analysis
 
 ```{r}
-#To get names of y and x 
+###To get names of elements on list y and x 
 names(AF_mc_simulation$x)
 names(AF_mc_simulation$y)
 
-#VIP scores
+### VIP scores
 pls_results <- plsr.mcSimulation(object = AF_mc_simulation,
-                                 resultName = "NPV_AF",
+                                 resultName = "trade_off",
                                  ncomp = 1)
 
+### Cut off at 0.8
 plot_pls(pls_results, threshold = 0.8, input_table = input_estimates)
 
 
-```
+### Cut off at 0 to appreciate the impact of most of our variables on the outcome
+plot_pls(pls_results, threshold = 0, input_table = input_estimates)
 
 
-## Expected value of perfect information EVPI with recommendation
-
-```{r}
-mcresults_table <- data.frame(AF_mc_simulation$x,
-                                 AF_mc_simulation$y[26:28])
-
-evpi <- multi_EVPI(mc = mcresults_table, 
-                 "NPV_AF")
-summary(evpi)
-plot(evpi, "NPV_AF")
 
 ```
 
-#EVPI without recommendation
+## Value of information (VoI) analysis
 
 ```{r}
+
 mcresults_table <- data.frame(AF_mc_simulation$x,
                           AF_mc_simulation$y[26:28])
 
@@ -291,11 +299,11 @@ evpi<- multi_EVPI(mc= mcresults_table,
 
 
 plot_evpi<-plot_evpi(evpi,
-          decision_vars = "NPV_AF",
-          new_names= "Rubber and Black pepper",
+          decision_vars = "trade_off",
+          new_name= "Rubber and black pepper",
           unit= "NPR",
           bar_color= "yellow4",
-          base_size=15)
+          base_size=10)
 
 plot_evpi
 
@@ -306,11 +314,12 @@ plot_evpi
 ```{r}
 compound_figure(model = system_benefit, 
 input_table = table, 
-decision_var_name = "NPV_AF",
+decision_var_name = "trade_off",
 cashflow_var_name = "cashflow",
 model_runs = 200,
 distribution_method = 'smooth_simple_overlay')
 ```
+
 
 # Uncertainties and Issues
 
