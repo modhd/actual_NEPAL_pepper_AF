@@ -1,30 +1,21 @@
 variable;lower ;median;upper;distribution;label;description
 n_years;25;NA;25;const;years;The time span that is modeled
 discount_rate;10;NA;10;const;discount rate;Discount rate %
-establishment_cost_mono;100000;NA;1000000;posnorm;Rubber establishment cost;Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals ~144000 NPR)
-establishment_cost_AF;145000;NA;1500000;posnorm;intercropping establishment cost;Cost of rubber and pepper establishment in Nepalese rupee/ha
-rubber_main_cost;20000;NA;100000;posnorm;rubber maintenance cost;Cost to maintain rubber system (NPR)
-var_rubber_main_cost;5;NA;15;posnorm;variance rubber maintenance cost;The variance in rubber maintenance cost (%)
-pepper_main_cost;10000;NA;250000;posnorm;pepper maintenance cost;Annual cost to maintain black pepper system (NPR)
-var_pepper_main_cost;5;NA;15;posnorm;variance pepper maintenance cost;The variance in pepper maintenance cost (%)
-max_pepper_yield;50;NA;280;posnorm;pepper yield;The peak yield of pepper (t/ha)
-var_pepper_yield;5;NA;10;posnorm;variance pepper yield;The variance in pepper yield (%)
-max_rubber_yield;100;NA;450;posnorm;Rubber yield;The peak yield of rubber (t/ha)
-var_rubber_yield;10;NA;20;posnorm;variance rubber yield;The variance in rubber yield (%)
-rubber_price;140000;NA;200000;posnorm;rubber price;Price of rubber per tonnes 
-pepper_price;80000;NA;150000;posnorm;pepper price;Price of pepper per tonne
+Var_Cv;5;NA;10;posnorm;Variance; Variance variables in %
+establishment_cost_mono;77000;NA;100000;posnorm;Rubber establishment cost;Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals ~144000 NPR)
+establishment_cost_AF;81300;NA;144000;posnorm;intercropping establishment cost;Cost of pepper and rubber establishment in Nepalese rupee/ha
+rubber_main_cost;451812;NA;569792;posnorm;rubber maintenance cost;Annual Cost to maintain rubber system (NPR)
+pepper_main_cost;75000;NA;100000;posnorm;pepper maintenance cost;Annual Cost to maintain black pepper system (NPR)
+max_pepper_yield;25;NA;38;posnorm;pepper yield;The peak yield of pepper (t/ha)
+max_rubber_yield;37.5;NA;50;posnorm;Rubber yield;The peak yield of rubber (t/ha)
+rubber_price;459420;NA;687000;posnorm;rubber price;Price of rubber per tonnes 
+pepper_price;700000;NA;900000;posnorm;pepper price;Price of pepper per tonne
 mono_nutrient;2;NA;6;posnorm;fertilizer monoculture;Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in rubber monoculture (kg/ha)
-var_mono_nutrient;0.1;NA;0.2;posnorm;variance fertilizer monoculture;The variance in number of NPK fertilizer bags in monoculture (%)
 AF_nutrient;4;NA;10;posnorm;fertilizer intercropping;Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in Rubber-black pepper AF (kg/ha)
-var_AF_nutrient;0.1;NA;0.2;posnorm;variance fertilizer intercropping;The variance in number of NPK fertilizer bags in AF (%)
-fertilizer_price;10812;NA;20000;posnorm;fertilizer price;Monetary value of a 50 kg NPK fertilizer bag (NPR)
-cost_water;1450;NA;30000;posnorm;water price;Monetary value of water saved through interception in rubber mono (NPR)
-var_cost_water;5;NA;20;posnorm;variance water;Variance in water costs(%)
+fertilizer_price;10812;NA;12000;posnorm;Montetary value of nutrient recycled;Monetary value of a 50 kg NPK fertilizer bag (NPR)
+cost_water;1450;NA;10000;posnorm;water price;Monetary value of water saved through interception in rubber mono (NPR)
 water_competition_probability;0.1;NA;0.3;tnorm_0_1;water competition probability;The probability that roots will compete (higher irrigation costs and lower yields (%)
 yield_if_competition;0.3;NA;0.5;posnorm;probabilty yield if competition;Estimated yield loss in case of competition to water compared to well watered plants (%)
-var_yield_if_competition;0.1;NA;0.2;posnorm;variance yield if competition;variation in yield if competition (%)
-var_AF_water;5;NA;30;posnorm;variance water monoculture;the variance in water saved in interception in rubber mono (m^3/ha)
 mean_AF_water;600;NA;2500;posnorm;mean water;Mean of water(m^3/ha)
 competition_AF_water;1200;NA;3100;posnorm;water competition in intercropping;"plus 600 compared to ""usual"" need" (m^3/ha)
 knowledge_gap_probability;0.2;NA;0.4;tnorm_0_1;knowledge gap;Percentual estimation of knowledge gaps to manage and yield the pepper (%)
-var_knowledge_gap_probability;0.01;NA;0.02;posnorm;variance knoweldge gap;Variation in knowledge gap (%)
