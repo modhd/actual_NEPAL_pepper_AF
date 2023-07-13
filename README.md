@@ -1,8 +1,28 @@
-# NEPAL_pepper_AF
+# "Improving smallholder farmer's income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
 
-A desicion analysis wheter smallholder farmes in Nepal should intercrop their rubber monocultures with black pepper. A contribution of the online-team to the module "Desicion Analysis and Forecasting for Agrifcultural Development" at University Bonn. 
+A desicion analysis wheter smallholder farmes in Nepal should intercrop their rubber monocultures with black pepper. A contribution of the online-team to the module "Desicion Analysis and Forecasting for Agricultural Development" at University Bonn. 
 
 ![The according conceptual model.](https://github.com/modhd/actual_NEPAL_pepper_AF/blob/main/results/conceptual_model.png?raw=true)
+
+
+
+
+# Files
+
+The file ```agroforestry_project.Rmd``` is __report__ that includes a thematic introduction, the methodology used in the analysis, as well as results and discussion. It can be knitted into a ```html``` file by default.
+
+
+In the folder ```data```, the __input table__ ```input_table.csv```is stored.
+
+
+We set the r-project ```NEPAL_pepper_AF.rproj``` as working directory.
+
+
+In the folder ```results```, an image of the conceptual model ```conceptual_model.jpg``` as well as results from the Monte Carlo simulation ```mc_simulation_results.csv``` and EVPI calculation ```2_evpi_results.csv```are stored.
+
+
+
+
 
 # References 
 CIFOR-ICRAF. 2022. _“Rubber Set to Revitalize Nepal’s Degraded and Underutilized Lands to Boost Climate and Livelihoods’ Goals.”_ CIFOR-ICRAF. https://www.cifor-icraf.org/news/corporate-news/rubber-set-to-revitalize-nepals-degraded-and-underutilized-lands-to-boost-climate-and-livelihoods-goals/.
