@@ -1,8 +1,10 @@
 ---
-title: "Improving smallholder farmers' income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
+title: "Improving smallholder farmer's income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
 author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
 date: "2023-07-13"
-output: bookdown::html_document2:
+
+output: 
+  bookdown::html_document2:
       theme: cerulean
       toc: true
       toc_float: true
@@ -10,9 +12,9 @@ output: bookdown::html_document2:
       number_sections: true
       number_figures: true
 
-bibliography: 
-  - bib/references.bib 
-  - bib/packages.bib
+bibliography: ["./bib/references.bib", "./bib/packages.bib"]
+biblio-style: "apalike"
+link-citations: true
 
 ---
 
@@ -24,23 +26,6 @@ library(readr)
 ```
 
 
-# HowTo: Croff-References of Tables and Figures
-1. Copy the BibTex code of the reference into the bib/references textfile in the repository
-2. insert the ```{asis, echo=FALSE}``` option in the r-chunk where you want to cite (see example below).
-3. Citation: see example
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-For citing: Figure - \@ref(fig:name) , Table - \@ref(tab:table)
-
-i.e. \@ref(tab:input table)
-
-
-# HowTo: References 
-In-text references: ```[@R-<shorturl as stated in the bibtex file>]``` i.e. The [@decisionSupport] package
-was used to conduct the MC simulation as well as the NPV and VoI calcutations.
-
-
 ```{r, add_packages_bib, include=FALSE}
 knitr::write_bib(c(.packages(),
                    'decisionSupport', 'DiagrammeR'), 'bib/packages.bib')
@@ -50,36 +35,39 @@ knitr::write_bib(c(.packages(),
 
 # **Overview**
 
-Rubber plant (Hevea brasiliensis) is a perennial crop and the natural source of rubber which is used in the production of a variety of products (Fox & Castella, 2013; Pandey et al., 2020). Natural rubber farming is a safe and affordable alternative to synthetic rubber production. 
+Rubber plant ( _Hevea brasiliensis_) is a perennial crop and the natural source of rubber which is used in the production of a variety of products [@fox2013; @pandey2020]. Natural rubber farming is a safe and affordable alternative to synthetic rubber production. 
 
-In recent decades, Nepal has experienced a huge trade deficit between the import and export of rubber and rubber-related products, and at the same time, their consumption exceeds production (Pandey et al., 2020; CIFOR-ICRAF, 2022).Furthermore, as rubber plants start yielding from six to seven years after planting and, onwards, there is a need to diversify the system to enable farmers to generate income before rubber attains its maturity stage. 
+In recent decades, Nepal has experienced a huge trade deficit between the import and export of rubber and rubber-related products, and at the same time, their consumption exceeds production [@pandey2020; @cifor2022]. Furthermore, as rubber plants start yielding from six to seven years after planting __[REFRENCE FOR YEAR OR FIRST YIELD]__  and, onwards, there is a need to diversify the system to enable farmers to generate income before rubber attains its maturity stage.  
 
-Black pepper (Piper nigrum L.) is a valuable crop which could be suitable for this agronomic intervention but could also improve farmers livelihoods and lower their dependency on the international market/price fluctuation of rubber. 
+Black pepper ( _Piper nigrum L._) is a valuable crop which could be suitable for this agronomic intervention but could also improve farmers livelihoods and lower their dependency on the international market/price fluctuation of rubber __[REFERENCE]__. 
 
-Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees, utilizing the vertical space and reducing weed competition _[REFERENCE]_. Rubber trees, on the other hand, benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth _[REFERENCE]_.
+Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees. The the vertical space is used mor efficiently and weed competition potentially reduces within the plantation. Rubber trees, on the other hand, might benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth __[REFERENCE]__.
 
-Nepal, being a country known for its diverse agro-climatic conditions, offers a favorable environment for intercropping rubber with black pepper, a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
+Nepal, being a country known for its diverse agro-climatic conditions  __[REFERENCE]__ , offers a favorable environment for intercropping rubber with black pepper. We assume it as a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
 
 ## Current Situation of Rubber Production in Nepal
-Nepal's climate and land slope make natural rubber cultivation ideal for addressing issues such as underemployment, underutilization of land, and poverty. However, rubber monocropping poses several challenges for farmers, including a lack of income during the long immature period, vulnerability to price shocks, seasonality, disease outbreaks, and natural disaster (DERAF report, 2020). There is a high level of rubber and pepper imports because of tight supply conditions in Nepal (Economic times, 2020). To overcome these obstacles there is a need to promoting rubber agroforestry practices especially with compatible and mutual beneficial crop species. 
+Nepal's climate and land slope make natural rubber cultivation ideal for addressing issues such as underemployment, underutilization of land, and poverty. However, rubber monocropping poses several challenges for farmers, including a lack of income during the long immature period, vulnerability to price shocks, seasonality, disease outbreaks, and natural disaster (DERAF report, 2020). There is a high level of rubber and pepper imports because of tight supply conditions in Nepal __[REFERENCE]__ (Economic times, 2020). To overcome these obstacles there is a need to promoting rubber agroforestry practices especially with compatible and mutual beneficial crop species. 
 
-## Why Rubber and Black Pepper Agroforestry system
-Integrating black pepper and Rubber in an agroforestry system can offer a solution to improve food security, increase farmers' income, and enhance their livelihoods (Rahman et al., 2012). Intercropping rubber with black pepper enables smallholders to diversify their income sources and optimize land utilization during the initial six years it takes for rubber trees to become productive (Pepper Hub _YEAR_). Additionally, shading black pepper with rubber trees creates favorable growth conditions, including decreased irradiance and temperature, increased relative humidity, and higher leaf expansion, demonstrating adaptation to low light (Oleosio et al., 2021).
+## Why a Rubber and Black Pepper Agroforestry system?
+Integrating black pepper and Rubber in an agroforestry system can offer a solution to improve food security, increase farmers' income, and enhance their livelihoods [@rahman2012]. Intercropping rubber with black pepper enables smallholders to diversify their income sources and optimize land utilization during the initial six years it takes for rubber trees to become productive __[REFERENCE FOR YEAR OR FIRST YIELD]__ . Additionally, shading black pepper with rubber trees creates favorable growth conditions, including decreased irradiance and temperature, increased relative humidity, and higher leaf expansion, demonstrating adaptation to low light [@oliosi2021].
 
 ## Decision Problem
 To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as:
-1. Economic Impact: This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities. 
-2. Risk and Resilience: focuses on assessing the vulnerability of rubber intercropping systems to price shocks, disease outbreaks, natural disasters, and other risks, while identifying strategies to mitigate them. 
-3. Policy and Market Support: Involves the evaluation of existing policies, incentives, and market linkages to facilitate the adoption of rubber intercropping systems, addressing any barriers and gaps. 
-4. Cost-Benefit Analysis: This focuses on a comprehensive cost-benefit analysis, comparing the economic, environmental, and social benefits of rubber intercropping systems with rubber monocropping.
-5. Technical knowledge and support: This considers whether farmers have access to technical knowledge and support. This includes understanding the agronomic practices, pest and disease management, harvesting, processing, and marketing strategies for both crops. Training programs, extension services, and collaboration with agricultural experts can help address these knowledge gaps.
+
+__1. Economic Impact:__ This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities. 
+__2. Risk and Resilience:__ focuses on assessing the vulnerability of rubber intercropping systems to price shocks, disease outbreaks, natural disasters, and other risks, while identifying strategies to mitigate them. 
+__3. Policy and Market Support:__ Involves the evaluation of existing policies, incentives, and market linkages to facilitate the adoption of rubber intercropping systems, addressing any barriers and gaps. 
+__4. Cost-Benefit Analysis:__ This focuses on a comprehensive cost-benefit analysis, comparing the economic, environmental, and social benefits of rubber intercropping systems with rubber monocropping.
+__5. Technical knowledge and support:__ This considers whether farmers have access to technical knowledge and support. This includes understanding the agronomic practices, pest and disease management, harvesting, processing, and marketing strategies for both crops. Training programs, extension services, and collaboration with agricultural experts can help address these knowledge gaps.
 
 ## Decision
-Should farmers intercrop rubber and black pepper?
+
+**Should farmers intercrop their Rubber monocultures with pepper?**
 
 ## Alternatives
-1. Alternative 1: Promote Rubber monocropping 
-2. Alternative 2: Promote Rubber and Black Pepper intercropping
+
+__1. Baseline:__ Promote Rubber monocropping 
+__2. Alternative:__  Promote Rubber and Black Pepper intercropping
 
 ## Decision Maker
 The decision makers for this project are the smallholder rubber farmers in Jhapa, Nepal. The ultimate goal is to improve their income and livelihoods.
@@ -87,7 +75,7 @@ The decision makers for this project are the smallholder rubber farmers in Jhapa
 # **Methods**
 
 ## Conceptual model
-A conceptual model depicting the influence of rubber and black pepper intercropping system costs, benefits and risks on Net Present value (NPV) was developed by the project group members who acted as the stakeholders. The total cost comprised of establishment cost and maintenance cost, while total benefits comprised of natural and financial benefits. Lack of technical knowledge, water competition and economic fluctuation were the major risks identified. Economic fluctuation was however considered as a high variating variable in the price. A discount rate of 10% was chosen to calculate the Net Present Value.This conceptual model guided the development of the mathematical model. 
+A conceptual model depicting the influence of rubber and black pepper intercropping system costs, benefits and risks on Net Present value (NPV) was developed by the project group members who acted as the stakeholders \@ref(fig:cenceptual_model). The total cost comprised of establishment cost and maintenance cost, while total benefits comprised of natural and financial benefits. Lack of technical knowledge, water competition and economic fluctuation were the major risks identified. Economic fluctuation was however considered as a high variating variable in the price. A discount rate of 10 % was chosen to calculate the Net Present Value.This conceptual model guided the development of the mathematical model. 
 
 ```{r conceptual_model, out.width='100%', fig.align='center', fig.cap="Conceptual Model", echo=FALSE}
 
@@ -99,30 +87,33 @@ knitr::include_graphics('results/conceptual_model.png')
 Project group members who were calibrated in the decision analysis course were the experts. We used similar scenario from a literature search and some exchange with farmers in Nepal to generated input estimates with 90% confidence.
 
 
-```{r input_table, caption= "Input variables", echo=FALSE, warning=FALSE}
+```{r input_table, caption= "Table of input variables used in the model.", echo=F, warning=FALSE}
 library(knitr)
 options(scipen = 999)
 
 input_estimates <- read.csv("./data/AF_input_table.csv", header = TRUE, sep = ";")
+input_estimates <- subset(input_estimates, select = -c(median, label))
+knitr::kable(input_estimates)
 
-##input_estimates = subset(input_estimates, select = -c(median))
-#kable(input_estimates[2:7])
 ``` 
 
-## Assumption
+## Assumptions
 
-Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter. Thereby, especially the winter months are crucial to achieve high yields, and often, Pepper plants need to be irrigated. _[This knowledge was obtained by a fast literature research, Aditi and Team Report can you correct false facts if you humble over such? - Heidi]_ 
-We assumed that growing Black Pepper next to Rubber trees could either mitigate irrigation requirements as the rubber's shadow would increase the moisture, or amplify them as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
+Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation [@fao2023]. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter [@worldbank2021]. Thereby, especially the winter months are crucial to achieve high yields, and Pepper plants consequently would need to be irrigated.
+We assumed two scenarios concerning water regime in our agroforestry system: That on the first hand, black pepper grown next to rubber trees could mitigate irrigation requirements as the rubber's shadow would increase the moisture. On the other hand, intercroppping might amplify irrigation requirements as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
+
+
 Additionally, it is reported that litterfall releases high amounts of primary macronutrients such as Nitrogen, Phosphorous, and potassium (NPK) back into the soil. Estimating how much each system recycles will help to determine the profitability and sustainability of the studied systems in regard to nutrient cycling and minimize fertilization inputs in the following cropping systems.
 
 ## Code
 We used the *decisionSupport* package [@R-decisionSupport] to build the mathematical model and for probabilistic analysis.
 
 ### Variating variables
-Every variable was calculated with vv() function since variables will vary during the 25 years of the intervention. 
+Variables that shall variate with every annual step were calculated with using the```decisionSupport::vv()``` function. Consequently, the variation accorded to our estimated ranges and underlying distributions (see \tab:input_table). 
 
 ### Chance events
-Risks were calculated with chance_event() function which models the possibility of that event happening during the simulated time. 
+Our two water regime scenarios were modelled using the ```decisionSupport::chance_event()```function. A chance of .. percent was assumed that water competition would occur, leading to lower yields and highe rirrigation costs.
+
 
 ### Model function which will be used to run the Monte Carlo simulation
 
@@ -346,7 +337,7 @@ plot_evpi
 
 ```
 
-##**Compound figures**
+## **Compound figures**
 This is a simple function/code of the entire process
 
 ```{r}
@@ -357,12 +348,13 @@ cashflow_var_name = "cashflow",
 model_runs = 1000,
 distribution_method = 'smooth_simple_overlay')
 ```
-#**Limitations**
-We would have wished to have a holistic analysis of the system by considering more aspects, ideally the ones that would consider the sustainable development goals that fit into our context. Aspects that we ought to have considered but did not for the sake of simplicity and practice, are social aspects (policy,cultural, gender), and more environmental benefits such as biodiversity and system sustainability.
+
+# **Limitations**
+We would have wished to have a holistic analysis of the system by considering more aspects, ideally the ones that would consider the sustainable development goals that fit into our context. Aspects that we ought to have considered but did not for the sake of simplicity and practice, are social aspects (political, cultural, gender), and more environmental benefits such as biodiversity and system sustainability.
 
 # **Conclusion**
 This analysis reports the NPV difference of rubber monoculture versus rubber and black pepper intercropping. Based on our own estimates, the Monte Carlo results show that rubber and black pepper intercropping is likely to be a profitable intervention but could also lead to losses. The cashflow chart shows gradual gains during the simulated period of intervention.
 
-Our model was more sensitive to the price of water, maximum pepper yield as well as the probability of water competition in the intercropping system, due to their high VIP score. This indicates that there is need for further research on those variables in order to reduce uncertainities and make an informed decision.
+Our model was more sensitive to the price of water, maximum pepper yield as well as the probability of water competition in the intercropping system, due to their high VIP score. This indicates that there is need for further research on those variables in order to reduce uncertainties and make an informed decision.
 
-#**References**
+# **References**
