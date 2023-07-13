@@ -41,7 +41,7 @@ In recent decades, Nepal has experienced a huge trade deficit between the import
 
 Black pepper ( _Piper nigrum L._) is a valuable crop which could be suitable for this agronomic intervention but could also improve farmers livelihoods and lower their dependency on the international market/price fluctuation of rubber __[REFERENCE]__. 
 
-Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees. The the vertical space is used mor efficiently and weed competition potentially reduces within the plantation. Rubber trees, on the other hand, might benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth __[REFERENCE]__.
+Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees. The the vertical space is used mor efficiently and weed competition potentially reduces within the plantation. Rubber trees, on the other hand, might benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth [@oliosi2021].
 
 Nepal, being a country known for its diverse agro-climatic conditions  __[REFERENCE]__ , offers a favorable environment for intercropping rubber with black pepper. We assume it as a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
 
@@ -99,8 +99,9 @@ knitr::kable(input_estimates)
 
 ## Assumptions
 
-Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation [@fao2023]. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter [@worldbank2021]. Thereby, especially the winter months are crucial to achieve high yields, and Pepper plants consequently would need to be irrigated.
-We assumed two scenarios concerning water regime in our agroforestry system: That on the first hand, black pepper grown next to rubber trees could mitigate irrigation requirements as the rubber's shadow would increase the moisture. On the other hand, intercroppping might amplify irrigation requirements as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
+Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation [@fao2023]. The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter [@worldbank2021]. Thereby, especially the winter months are crucial to achieve high yields, and Pepper plants consequently would need to be irrigated.  
+We assumed two scenarios concerning water regime in our agroforestry system: That on the first hand, black pepper grown next to rubber trees could mitigate irrigation requirements as the rubber's shadow would increase the moisture. Such a benefitial microclimate was documented in Brazilian pepper-rubber-agroforestry-systems [@oliosi2021]. Is has to be noted that this system consisted of alternating rows of rubber and pepper. 
+Planted planted directly next to each other, the water competition might be higher. This is why we assumed that, on the other hand, intercroppping might amplify irrigation requirements as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
 
 
 Additionally, it is reported that litterfall releases high amounts of primary macronutrients such as Nitrogen, Phosphorous, and potassium (NPK) back into the soil. Estimating how much each system recycles will help to determine the profitability and sustainability of the studied systems in regard to nutrient cycling and minimize fertilization inputs in the following cropping systems.
