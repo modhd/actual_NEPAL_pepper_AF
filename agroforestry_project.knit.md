@@ -18,19 +18,10 @@ link-citations: true
 
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(knitr)
-library(decisionSupport)
-library(readr)
-```
 
 
-```{r, add_packages_bib, include=FALSE}
-knitr::write_bib(c(.packages(),
-                   'decisionSupport', 'DiagrammeR'), 'bib/packages.bib')
 
-```
+
 
 
 # **Overview**
@@ -77,25 +68,38 @@ The decision makers for this project are the smallholder rubber farmers in Jhapa
 ## Conceptual model
 A conceptual model depicting the influence of rubber and black pepper intercropping system costs, benefits and risks on Net Present value (NPV) was developed by the project group members who acted as the stakeholders \@ref(fig:cenceptual_model). The total cost comprised of establishment cost and maintenance cost, while total benefits comprised of natural and financial benefits. Lack of technical knowledge, water competition and economic fluctuation were the major risks identified. Economic fluctuation was however considered as a high variating variable in the price. A discount rate of 10 % was chosen to calculate the Net Present Value.This conceptual model guided the development of the mathematical model. 
 
-```{r conceptual_model, out.width='100%', fig.align='center', fig.cap="Conceptual Model", echo=FALSE}
-
-knitr::include_graphics('results/conceptual_model.png')
-
-```
+<div class="figure" style="text-align: center">
+<img src="results/conceptual_model.png" alt="Conceptual Model" width="100%" />
+<p class="caption">(\#fig:conceptual_model)Conceptual Model</p>
+</div>
 
 ## Input estimates
 Project group members who were calibrated in the decision analysis course were the experts. We used similar scenario from a literature search and some exchange with farmers in Nepal to generated input estimates with 90% confidence.
 
 
-```{r input_table, caption= "Table of input variables used in the model.", echo=F, warning=FALSE}
-library(knitr)
-options(scipen = 999)
 
-input_estimates <- read.csv("./data/AF_input_table.csv", header = TRUE, sep = ";")
-input_estimates <- subset(input_estimates, select = -c(median, label))
-knitr::kable(input_estimates)
-
-``` 
+|variable                      |    lower|    upper|distribution |description                                                                                                                 |
+|:-----------------------------|--------:|--------:|:------------|:---------------------------------------------------------------------------------------------------------------------------|
+|n_years                       |     25.0|     25.0|const        |The time span that is modeled                                                                                               |
+|discount_rate                 |     10.0|     10.0|const        |Discount rate %                                                                                                             |
+|Var_Cv                        |      5.0|     10.0|posnorm      |Variance variables in %                                                                                                     |
+|establishment_cost_mono       |  77000.0| 100000.0|posnorm      |Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals ~144000 NPR)                                           |
+|establishment_cost_AF         |  81300.0| 144000.0|posnorm      |Cost of pepper and rubber establishment in Nepalese rupee/ha                                                                |
+|rubber_main_cost              | 451812.0| 569792.0|posnorm      |Annual Cost to maintain rubber system (NPR)                                                                                 |
+|pepper_main_cost              |  75000.0| 100000.0|posnorm      |Annual Cost to maintain black pepper system (NPR)                                                                           |
+|max_pepper_yield              |     25.0|     38.0|posnorm      |The peak yield of pepper (t/ha)                                                                                             |
+|max_rubber_yield              |     37.5|     50.0|posnorm      |The peak yield of rubber (t/ha)                                                                                             |
+|rubber_price                  | 459420.0| 687000.0|posnorm      |Price of rubber per tonnes                                                                                                  |
+|pepper_price                  | 700000.0| 900000.0|posnorm      |Price of pepper per tonne                                                                                                   |
+|mono_nutrient                 |      2.0|      6.0|posnorm      |Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in rubber monoculture (kg/ha)     |
+|AF_nutrient                   |      4.0|     10.0|posnorm      |Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in Rubber-black pepper AF (kg/ha) |
+|fertilizer_price              |  10812.0|  12000.0|posnorm      |Monetary value of a 50 kg NPK fertilizer bag (NPR)                                                                          |
+|cost_water                    |   1450.0|  10000.0|posnorm      |Monetary value of water saved through interception in rubber mono (NPR)                                                     |
+|water_competition_probability |      0.1|      0.3|tnorm_0_1    |The probability that roots will compete (higher irrigation costs and lower yields (%)                                       |
+|yield_if_competition          |      0.3|      0.5|posnorm      |Estimated yield loss in case of competition to water compared to well watered plants (%)                                    |
+|mean_AF_water                 |    600.0|   2500.0|posnorm      |Mean of water(m^3/ha)                                                                                                       |
+|competition_AF_water          |   1200.0|   3100.0|posnorm      |plus 600 compared to "usual" need (m^3/ha)                                                                                  |
+|knowledge_gap_probability     |      0.2|      0.4|tnorm_0_1    |Percentual estimation of knowledge gaps to manage and yield the pepper (%)                                                  |
 
 ## Assumptions
 
@@ -117,7 +121,8 @@ Our two water regime scenarios were modelled using the ```decisionSupport::chanc
 
 ### Model function which will be used to run the Monte Carlo simulation
 
-```{r, echo=T, warning=F}
+
+```r
 library(decisionSupport)
 
 # Read data----
@@ -227,7 +232,6 @@ NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV
   return(list(cashflow= cashflow,NPV_decision= NPV_tradeoff,
               NPV_rubber= NPV_mono, NPV_AF= NPV_AF))
 }
-
 ```
 
 
@@ -236,45 +240,56 @@ NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV
 ## **Monte Carlo simulation** 
 This generates all possible outcomes of our interventions.
 
-``` {r}
+
+```r
 AF_mc_simulation <- mcSimulation(as.estimate(table),
                                          model_function = system_benefit,
                                          numberOfModelRuns = 1000,
                                          functionSyntax = "plainNames")
 write.csv(AF_mc_simulation, "./results/mc_simulation_results.csv")
-
 ```
 
 ## **Plotting the Net Present Value (NPV)**
 Plotting the NPV shows the outcome distribution of the different alternatives or/and of the decision, based on the Monte Carlo simulation results. The distribution plots generate an overlay economic output of the decision option.
 
-```{r}
+
+```r
 ## NPV distribution as histogram
 plot_distributions(mcSimulation_object = AF_mc_simulation,
                   vars = c("NPV_rubber", "NPV_AF"),
                   method = 'smooth_simple_overlay',
                   colors = c("#0000FF","#F0E442"),
                   base_size = 10)
+```
 
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+```r
 ## NPV distribution as boxplot
 plot_distributions(mcSimulation_object = AF_mc_simulation,
                   vars = c("NPV_rubber", "NPV_AF"),
                   method = 'boxplot',
                   colors = c("#0000FF","#F0E442"),
                   base_size = 10)
+```
 
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-3-2.png" width="672" />
+
+```r
 ## Value of the decision 
 plot_distributions(mcSimulation_object = AF_mc_simulation,
                   vars = "NPV_decision",
                   method = 'smooth_simple_overlay',
                   base_size = 10)
-
 ```
+
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-3-3.png" width="672" />
 
 ## **Cashflow analysis**
 This generates the monetary benefits trend during the simulated intervention period
 
-```{r}
+
+```r
 cashflow <- plot_cashflow(mcSimulation_object = AF_mc_simulation,
                           cashflow_var_name = "cashflow",
                           x_axis_name = "Years of intervention",
@@ -285,19 +300,48 @@ cashflow <- plot_cashflow(mcSimulation_object = AF_mc_simulation,
                           base= 10)
 
 cashflow
-
 ```
+
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ## **Sensitivity analysis (PLS)**
 In this part, we run a post_host analysis using the partial least square regression (PLS).This generated
 the projection score (VIP). The VIP score shows the variables to which the model is more sensitive either positively(green) or negatively(red); and which could possibly have a high impact on the outcome of the decision.
 A threshold of 0.8 was given, hence any variable with a VIP score above 0.8 was considered important.
 
-```{r}
+
+```r
 ### To get names of elements on list y and x 
 names(AF_mc_simulation$x)
-names(AF_mc_simulation$y)
+```
 
+```
+##  [1] "n_years"                       "discount_rate"                
+##  [3] "Var_Cv"                        "establishment_cost_mono"      
+##  [5] "establishment_cost_AF"         "rubber_main_cost"             
+##  [7] "pepper_main_cost"              "max_pepper_yield"             
+##  [9] "max_rubber_yield"              "rubber_price"                 
+## [11] "pepper_price"                  "mono_nutrient"                
+## [13] "AF_nutrient"                   "fertilizer_price"             
+## [15] "cost_water"                    "water_competition_probability"
+## [17] "yield_if_competition"          "mean_AF_water"                
+## [19] "competition_AF_water"          "knowledge_gap_probability"
+```
+
+```r
+names(AF_mc_simulation$y)
+```
+
+```
+##  [1] "cashflow1"    "cashflow2"    "cashflow3"    "cashflow4"    "cashflow5"   
+##  [6] "cashflow6"    "cashflow7"    "cashflow8"    "cashflow9"    "cashflow10"  
+## [11] "cashflow11"   "cashflow12"   "cashflow13"   "cashflow14"   "cashflow15"  
+## [16] "cashflow16"   "cashflow17"   "cashflow18"   "cashflow19"   "cashflow20"  
+## [21] "cashflow21"   "cashflow22"   "cashflow23"   "cashflow24"   "cashflow25"  
+## [26] "NPV_decision" "NPV_rubber"   "NPV_AF"
+```
+
+```r
 ### VIP scores
 pls_results <- plsr.mcSimulation(object = AF_mc_simulation,
                                  resultName = "NPV_decision",
@@ -305,27 +349,37 @@ pls_results <- plsr.mcSimulation(object = AF_mc_simulation,
 
 ### Cut off at 0.8
 plot_pls(pls_results, threshold = 0.8, input_table = table)
+```
 
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
+```r
 ### Cut off at 0 to appreciate the impact of most of our variables on the outcome
 plot_pls(pls_results, threshold = 0, input_table = table)
-
-
-
 ```
+
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-5-2.png" width="672" />
 
 ## **Value of information (VoI) analysis**
 This analysis is crucial since it informs the decision-maker how much he/she should pay to reduce uncertainities and avoid opportunity loss. 
 
-```{r}
 
+```r
 mcresults_table <- data.frame(AF_mc_simulation$x,
                           AF_mc_simulation$y[26:28])
 
 evpi<- multi_EVPI(mc= mcresults_table,
                   first_out_var = "NPV_decision", write_table = FALSE, outfolder = ./results/evpi_results)
+```
 
+```
+## [1] "Processing 3 output variables. This can take some time."
+## [1] "Output variable 1 (NPV_decision) completed."
+## [1] "Output variable 2 (NPV_rubber) completed."
+## [1] "Output variable 3 (NPV_AF) completed."
+```
 
+```r
 plot_evpi<-plot_evpi(evpi,
           decision_vars = "NPV_decision",
           new_name= "Rubber and black pepper",
@@ -334,13 +388,15 @@ plot_evpi<-plot_evpi(evpi,
           base_size=10)
 
 plot_evpi
-
 ```
+
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ## **Compound figures**
 This is a simple function/code of the entire process
 
-```{r}
+
+```r
 compound_figure(model = system_benefit, 
 input_table = table, 
 decision_var_name = "NPV_decision",
@@ -348,6 +404,13 @@ cashflow_var_name = "cashflow",
 model_runs = 1000,
 distribution_method = 'smooth_simple_overlay')
 ```
+
+```
+## [1] "Processing 1 output variables. This can take some time."
+## [1] "Output variable 1 (NPV_decision) completed."
+```
+
+<img src="agroforestry_project_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 # **Limitations**
 We would have wished to have a holistic analysis of the system by considering more aspects, ideally the ones that would consider the sustainable development goals that fit into our context. Aspects that we ought to have considered but did not for the sake of simplicity and practice, are social aspects (political, cultural, gender), and more environmental benefits such as biodiversity and system sustainability.
