@@ -1,7 +1,7 @@
 ---
 title: "Improving smallholder farmers' income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
 author: "Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga"
-date: "2023-07-09"
+date: "2023-07-13"
 output: bookdown::html_document2:
       theme: cerulean
       toc: true
@@ -56,7 +56,7 @@ In recent decades, Nepal has experienced a huge trade deficit between the import
 
 Black pepper (Piper nigrum L.) is a valuable crop which could be suitable for this agronomic intervention but could also improve farmers livelihoods and lower their dependency on the international market/price fluctuation of rubber. 
 
-Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees, utilizing the vertical space and reducing weed competition [REFERENCE]. Rubber trees, on the other hand, benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth [REFERENCE].
+Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees, utilizing the vertical space and reducing weed competition _[REFERENCE]_. Rubber trees, on the other hand, benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth _[REFERENCE]_.
 
 Nepal, being a country known for its diverse agro-climatic conditions, offers a favorable environment for intercropping rubber with black pepper, a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
 
@@ -67,7 +67,7 @@ Nepal's climate and land slope make natural rubber cultivation ideal for address
 Integrating black pepper and Rubber in an agroforestry system can offer a solution to improve food security, increase farmers' income, and enhance their livelihoods (Rahman et al., 2012). Intercropping rubber with black pepper enables smallholders to diversify their income sources and optimize land utilization during the initial six years it takes for rubber trees to become productive (Pepper Hub _YEAR_). Additionally, shading black pepper with rubber trees creates favorable growth conditions, including decreased irradiance and temperature, increased relative humidity, and higher leaf expansion, demonstrating adaptation to low light (Oleosio et al., 2021).
 
 ## Decision Problem
-To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as;
+To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as:
 1. Economic Impact: This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities. 
 2. Risk and Resilience: focuses on assessing the vulnerability of rubber intercropping systems to price shocks, disease outbreaks, natural disasters, and other risks, while identifying strategies to mitigate them. 
 3. Policy and Market Support: Involves the evaluation of existing policies, incentives, and market linkages to facilitate the adoption of rubber intercropping systems, addressing any barriers and gaps. 
@@ -87,12 +87,11 @@ The decision makers for this project are the smallholder rubber farmers in Jhapa
 # **Methods**
 
 ## Conceptual model
-A conceptual model depicting the influence of rubber and black pepper intercropping system costs, benefits and risks on Net Present value (NPV) was developed by the project group members who acted as the stakeholders. The total cost comprised of establishment cost and maintenance cost, while total benefits comprised of natural and financial benefits. Lack of technical knowledge, water competition and economic fluctuation were the major risks identified. Economic fluctuation was however considered as a variating variable in the price. A discount rate of 10% was chosen to calculate the Net Present Value.This conceptual model guided the development of the mathematical model. 
+A conceptual model depicting the influence of rubber and black pepper intercropping system costs, benefits and risks on Net Present value (NPV) was developed by the project group members who acted as the stakeholders. The total cost comprised of establishment cost and maintenance cost, while total benefits comprised of natural and financial benefits. Lack of technical knowledge, water competition and economic fluctuation were the major risks identified. Economic fluctuation was however considered as a high variating variable in the price. A discount rate of 10% was chosen to calculate the Net Present Value.This conceptual model guided the development of the mathematical model. 
 
 ```{r conceptual_model, out.width='100%', fig.align='center', fig.cap="Conceptual Model", echo=FALSE}
 
-#knitr::include_graphics('results/conceptual_model.png')
-#ADD png of model
+knitr::include_graphics('results/conceptual_model.png')
 
 ```
 
@@ -120,19 +119,27 @@ Additionally, it is reported that litterfall releases high amounts of primary ma
 We used the *decisionSupport* package [@R-decisionSupport] to build the mathematical model and for probabilistic analysis.
 
 ### Variating variables
-Every variable calculated with vv() function since variable will vary during the 25 years of the intervention. 
+Every variable was calculated with vv() function since variables will vary during the 25 years of the intervention. 
 
 ### Chance events
 Risks were calculated with chance_event() function which models the possibility of that event happening during the simulated time. 
 
-### Model function which will be used to run the montecarlo simulation
+### Model function which will be used to run the Monte Carlo simulation
 
 ```{r, echo=T, warning=F}
 library(decisionSupport)
 
 # Read data----
 table <- read.csv("./data/AF_input_table.csv", sep = ";")
-str(table) # to check whether reading data was successful
+
+# Make variable to check what each code generates and if it works
+
+make_variables <- function(est,n=1)
+{ x<-random(rho=est, n=n)
+for(i in colnames(x)) assign(i,
+as.numeric(x[1,i]),envir=.GlobalEnv)}
+
+make_variables(as.estimate(table))
 
 
 # Model function----
@@ -140,38 +147,38 @@ str(table) # to check whether reading data was successful
 system_benefit <- function(x, varnames) {
 
 ## Natural benefits ----
- # Nutrient cycling (from litterfall)
+ ### Nutrient cycling (from litterfall)
 
 mono_nutrient <- vv(var_mean = mono_nutrient,
-                            var_CV = var_mono_nutrient,
+                            var_CV = Var_Cv,
                             n = n_years) 
 
 mono_nutrient_saved <- mono_nutrient* fertilizer_price  #Monetary value of NPK fertilizer bags saved in rubber monoculture
 
 AF_nutrient <- vv(var_mean = AF_nutrient,
-                            var_CV = var_AF_nutrient,
+                            var_CV = Var_Cv,
                             n = n_years)
 
 AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fertilizer bags saved in rubber and pepper system  
 
 
 ## Yields----
- # Scenarios
+ ## Scenarios
   ### As it is not known yet, the moist microclimate underneath the rubber trees can result in higher 
   ### pepper yields or, on the other hand, competition of the roots might lead to lower yields of both crops
   water_competition <- chance_event(water_competition_probability, value_if = 1, value_if_not = 0)
   
   ### Account for risk in diminished yields due to knowledge gaps especially at the initial phase
   ### and risk of knowledge gaps that could also lead to lower yields
-  management_errors <- vv(var_mean = knowledge_gap_probability, var_CV = var_knowledge_gap_probability,
+  management_errors <- vv(var_mean = knowledge_gap_probability, var_CV = Var_Cv,
                           n = n_years, relative_trend = - 10)
   
-  # Yield incomes
-  rubber_yield <- vv(var_mean = max_rubber_yield, var_CV = var_rubber_yield, n = n_years)
+  ## Yield incomes
+  rubber_yield <- vv(var_mean = max_rubber_yield, var_CV = Var_Cv, n = n_years)
   rubber_yield <- rubber_yield * (1 - management_errors) * (1 - water_competition * yield_if_competition)
   rubber_income <- rubber_yield * rubber_price
     
-  pepper_yield <- vv(var_mean = max_pepper_yield, var_CV = var_pepper_yield, n = n_years)
+  pepper_yield <- vv(var_mean = max_pepper_yield, var_CV = Var_Cv, n = n_years)
   pepper_yield <- pepper_yield * (1 - management_errors)* (1 - water_competition * yield_if_competition)
   pepper_income <- pepper_yield * pepper_price
   
@@ -183,23 +190,23 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
 
 ## Costs----
   ### Establishment costs in first year
-  establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years))
-  establistment_cost_AF <- c(establishment_cost_AF, rep(0, n_years))
+  establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years-1))
+  establistment_cost_AF <- c(establishment_cost_AF, rep(0, n_years-1))
   
-  maintenance_cost_mono <- vv(var_mean = rubber_main_cost, var_CV = var_rubber_main_cost,
+  maintenance_cost_mono <- vv(var_mean = rubber_main_cost, var_CV = Var_Cv,
                               n = n_years)
-  maintenance_cost_pepper <- vv(var_mean = pepper_main_cost, var_CV = var_pepper_main_cost,
+  maintenance_cost_pepper <- vv(var_mean = pepper_main_cost, var_CV = Var_Cv,
                               n = n_years)
   
   
   ### Water costs
   ### pepper needs to be irrigated which is an addition cost.
-  price_water <- vv(cost_water, var_cost_water, n_years)
+  price_water <- vv(cost_water, Var_Cv, n_years)
   
   if (water_competition) {
-    AF_water <- vv(mean_AF_water, var_AF_water, n_years)
+    AF_water <- vv(mean_AF_water,Var_Cv, n_years)
   } else {
-    AF_water <- vv(competition_AF_water, var_AF_water, n_years)
+    AF_water <- vv(competition_AF_water, Var_Cv, n_years)
   }
     
   cost_AF_water <- AF_water * price_water
@@ -207,19 +214,17 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
   
   ## Substracting the costs to get final benefits----
   
-  ###Mono rubber final benefits
+  ### Mono rubber final benefits
   final_income_mono <- rubber_benefit - (maintenance_cost_mono + establishment_cost_mono)
     
   ### Rubber intercropping final benefits
   final_income_AF <- AF_benefit - (establishment_cost_AF + maintenance_cost_pepper
                                                    + maintenance_cost_mono + cost_AF_water)
 
-  ###Trade off benefits and cashflow
+  ### Trade off benefits and cashflow
 tradeoff_benefit <- final_income_AF - final_income_mono
 
-cashflow <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = FALSE)
-
-cumul_cashflow <- cumsum(cashflow) #cumulative cashflow over 25 years
+cashflow <- final_income_AF
 
   ### NPV 
 NPV_mono <- discount(final_income_mono, discount_rate = discount_rate, calculate_NPV = TRUE) #for rubber monoculture
@@ -228,7 +233,7 @@ NPV_tradeoff <- discount(tradeoff_benefit, discount_rate = discount_rate, calcul
   
 NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV = TRUE) #for rubber and pepper
   
-  return(list(cashflow= cumul_cashflow,NPV_decision= NPV_tradeoff,
+  return(list(cashflow= cashflow,NPV_decision= NPV_tradeoff,
               NPV_rubber= NPV_mono, NPV_AF= NPV_AF))
 }
 
@@ -237,7 +242,7 @@ NPV_AF <- discount(final_income_AF, discount_rate = discount_rate, calculate_NPV
 
 # **Results and Discussion**
 
-##**Montercarlo simulation** 
+## **Monte Carlo simulation** 
 This generates all possible outcomes of our interventions.
 
 ``` {r}
@@ -249,8 +254,8 @@ write.csv(AF_mc_simulation, "./results/mc_simulation_results.csv")
 
 ```
 
-##**Plotting the Net Presnt Value (NPV)**
-Plotting the NPV shows the outcome distribution of the different alternatives or/and of the decision, based on the montercarlo simulation results. The distribution plots generate an overlay economic output of the decision option.
+## **Plotting the Net Present Value (NPV)**
+Plotting the NPV shows the outcome distribution of the different alternatives or/and of the decision, based on the Monte Carlo simulation results. The distribution plots generate an overlay economic output of the decision option.
 
 ```{r}
 ## NPV distribution as histogram
@@ -298,7 +303,7 @@ the projection score (VIP). The VIP score shows the variables to which the model
 A threshold of 0.8 was given, hence any variable with a VIP score above 0.8 was considered important.
 
 ```{r}
-###To get names of elements on list y and x 
+### To get names of elements on list y and x 
 names(AF_mc_simulation$x)
 names(AF_mc_simulation$y)
 
@@ -308,11 +313,11 @@ pls_results <- plsr.mcSimulation(object = AF_mc_simulation,
                                  ncomp = 1)
 
 ### Cut off at 0.8
-plot_pls(pls_results, threshold = 0.8, input_table = input_estimates)
+plot_pls(pls_results, threshold = 0.8, input_table = table)
 
 
 ### Cut off at 0 to appreciate the impact of most of our variables on the outcome
-plot_pls(pls_results, threshold = 0, input_table = input_estimates)
+plot_pls(pls_results, threshold = 0, input_table = table)
 
 
 
@@ -352,11 +357,11 @@ cashflow_var_name = "cashflow",
 model_runs = 1000,
 distribution_method = 'smooth_simple_overlay')
 ```
-
-
+#**Limitations**
+We would have wished to have a holistic analysis of the system by considering more aspects, ideally the ones that would consider the sustainable development goals that fit into our context. Aspects that we ought to have considered but did not for the sake of simplicity and practice, are social aspects (policy,cultural, gender), and more environmental benefits such as biodiversity and system sustainability.
 
 # **Conclusion**
-This analysis reports the NPV difference of rubber monoculture versus rubber and black pepper intercropping. Based on our own estimates, the Monte Carlo results show that rubber and black pepper intercropping is likely to lead to a loss which is also seen on the cashflow chart.
+This analysis reports the NPV difference of rubber monoculture versus rubber and black pepper intercropping. Based on our own estimates, the Monte Carlo results show that rubber and black pepper intercropping is likely to be a profitable intervention but could also lead to losses. The cashflow chart shows gradual gains during the simulated period of intervention.
 
 Our model was more sensitive to the price of water, maximum pepper yield as well as the probability of water competition in the intercropping system, due to their high VIP score. This indicates that there is need for further research on those variables in order to reduce uncertainities and make an informed decision.
 
