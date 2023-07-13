@@ -3,7 +3,7 @@
   author = {{R Core Team}},
   organization = {R Foundation for Statistical Computing},
   address = {Vienna, Austria},
-  year = {2022},
+  year = {2021},
   url = {https://www.R-project.org/},
 }
 
@@ -18,24 +18,24 @@
 @Manual{R-DiagrammeR,
   title = {DiagrammeR: Graph/Network Visualization},
   author = {Richard Iannone},
-  year = {2023},
-  note = {R package version 1.0.10},
+  year = {2022},
+  note = {R package version 1.0.9},
   url = {https://github.com/rich-iannone/DiagrammeR},
 }
 
 @Manual{R-knitr,
   title = {knitr: A General-Purpose Package for Dynamic Report Generation in R},
   author = {Yihui Xie},
-  year = {2023},
-  note = {R package version 1.43},
+  year = {2022},
+  note = {R package version 1.39},
   url = {https://yihui.org/knitr/},
 }
 
 @Manual{R-readr,
   title = {readr: Read Rectangular Text Data},
   author = {Hadley Wickham and Jim Hester and Jennifer Bryan},
-  year = {2023},
-  note = {R package version 2.1.4},
+  year = {2022},
+  note = {R package version 2.1.2},
   url = {https://CRAN.R-project.org/package=readr},
 }
 
@@ -58,5 +58,5 @@
   publisher = {Chapman and Hall/CRC},
   year = {2014},
   note = {ISBN 978-1466561595},
+  url = {http://www.crcpress.com/product/isbn/9781466561595},
 }
-
