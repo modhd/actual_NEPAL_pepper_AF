@@ -54,10 +54,18 @@ Integrating black pepper and Rubber in an agroforestry system can offer a soluti
 ## Decision Problem
 To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as:
 
+
 __1. Economic Impact:__ This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities. 
+
 __2. Risk and Resilience:__ focuses on assessing the vulnerability of rubber intercropping systems to price shocks, disease outbreaks, natural disasters, and other risks, while identifying strategies to mitigate them. 
+
+
 __3. Policy and Market Support:__ Involves the evaluation of existing policies, incentives, and market linkages to facilitate the adoption of rubber intercropping systems, addressing any barriers and gaps. 
+
+
 __4. Cost-Benefit Analysis:__ This focuses on a comprehensive cost-benefit analysis, comparing the economic, environmental, and social benefits of rubber intercropping systems with rubber monocropping.
+
+
 __5. Technical knowledge and support:__ This considers whether farmers have access to technical knowledge and support. This includes understanding the agronomic practices, pest and disease management, harvesting, processing, and marketing strategies for both crops. Training programs, extension services, and collaboration with agricultural experts can help address these knowledge gaps.
 
 ## Decision
