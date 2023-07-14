@@ -20,7 +20,7 @@ We set the r-project ```NEPAL_pepper_AF.rproj``` as working directory.
 
 In the folder ```results```, an image of the conceptual model ```conceptual_model.jpg``` as well as results from the Monte Carlo simulation ```mc_simulation_results.csv``` and EVPI calculation ```2_evpi_results.csv```are stored.
 
-
+The file ``ìssues_to_tackle.Rmd``` contains __ideas and adjustments__ we would tackle in further steps after submission.
 
 
 
