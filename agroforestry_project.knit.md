@@ -311,7 +311,7 @@ A threshold of 0.8 was given, hence any variable with a VIP score above 0.8 was 
 
 
 ```r
-### To get names of elements on list y and x 
+### To get names of elements on lists y and x 
 names(AF_mc_simulation$x)
 ```
 
@@ -361,7 +361,7 @@ plot_pls(pls_results, threshold = 0, input_table = table)
 <img src="agroforestry_project_files/figure-html/unnamed-chunk-5-2.png" width="672" />
 
 ## **Value of information (VoI) analysis**
-This analysis is crucial since it informs the decision-maker how much he/she should pay to reduce uncertainities and avoid opportunity loss. 
+This analysis is crucial since it informs the decision-maker how much he/she should be willing to pay to get perfect information to reduce uncertainities and avoid opportunity loss. 
 
 
 ```r
