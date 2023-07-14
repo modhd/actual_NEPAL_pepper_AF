@@ -1,0 +1,47 @@
+---
+title: "Issues we would tackle in further progress"
+author: "Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Norina Murtaza, Kalu Onyinyechi, Dorcas Sanginga"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::html_document2:
+      theme: cerulean
+      toc: true
+      toc_float: true
+      toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this document, we state adjustions and aspects we would like to include if working further on the project.
+
+
+# Holistic approach
+
+At the moment, our model depends on economical calculations only. Social and environmental aspects are not covered in fuller extend.
+
+## Knowledge risk
+
+Feedback underlined that it is sufficient to include yield losses due to management errors, especially within the first years after agroforestry establishment (realized as __knowledge risk__ within the model). Our approach was a rough estimation tough. Talks with experts and smallholder farmers who have introduced similiar agroforestry systems could improve the estimation of how this risk would decrease over the years. For example, some deficits might get clear in later years with ongoing tree harvest only. 
+
+Furthermore, such interviews would help to develop a feeling of what is necessary for a farmer to optimally reduce the knowledge risk. Possible factors might be: willingness to learn, ability to socialize (to ask for help, connect to experienced farmers, ...), infrastructure (nearby organizations giving workshops or helping to network, fundings allowing to spend time on learning, ...).
+
+
+The possible knowledge establishment and it's according factors then could be used to model our knowledge risk more precisely.
+
+
+## Environmental sercives of Agroforestry systems
+
+The __nutrient__ dynamics of our agroforestry systems are merely estimated based on the pepper tree`s litterfall. Understanding and modelling the dynamcs of litterfall decomposition or the nutrient demands of both crops (whether they complement or rather compete) would make our estimation more solid.
+
+As __biodiversity__ enhancement is one of the main effects of agroforestry systems, it is an important benefit to be included into the model. Literature research and expert talk could reveal whether beneficial insects would profit from establishing pepper trees underneath rubber, for example. 
+
+Secondly, lowered __erosion__ due to the flat rooting system of pepper trees could be included into the model.
+
+
+# Personal
+
+## Improve estimation abilities
+
+Our estimation abilities are not used often at the current state. Further trainings would enhance our model results.
