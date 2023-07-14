@@ -134,10 +134,10 @@ table <- read.csv("./data/AF_input_table.csv", sep = ";")
 
 # Make variable to check what each code generates and if it works
 
-make_variables <- function(est,n=1)
-{ x<-random(rho=est, n=n)
-for(i in colnames(x)) assign(i,
-as.numeric(x[1,i]),envir=.GlobalEnv)}
+make_variables <- function(est,n=1) { 
+   x <- random(rho=est, n=n)
+    for (i in colnames(x)) assign(i,as.numeric(x[1,i]), envir=.GlobalEnv)
+  }
 
 make_variables(as.estimate(table))
 
@@ -190,8 +190,8 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
 
 ## Costs----
   ### Establishment costs in first year
-  establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years-1))
-  establistment_cost_AF <- c(establishment_cost_AF, rep(0, n_years-1))
+  establistment_cost_mono <- c(establishment_cost_mono, rep(0, n_years - 1))
+  establistment_cost_AF <- c(establishment_cost_AF, rep(0, n_years - 1))
   
   maintenance_cost_mono <- vv(var_mean = rubber_main_cost, var_CV = Var_Cv,
                               n = n_years)
