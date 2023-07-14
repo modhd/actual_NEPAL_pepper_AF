@@ -315,7 +315,7 @@ plot_pls(pls_results, threshold = 0, input_table = table)
 ```
 
 ## **Value of information (VoI) analysis**
-This analysis is crucial since it informs the decision-maker how much he/she should pay to reduce uncertainities and avoid opportunity loss. 
+This analysis is crucial since it informs the decision-maker how much he/she be willing to pay if given perfect information, to reduce uncertainities and avoid opportunity loss. 
 
 ```{r}
 
