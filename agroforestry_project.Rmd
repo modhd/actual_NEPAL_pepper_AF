@@ -166,12 +166,10 @@ AF_nutrient_saved <- AF_nutrient * fertilizer_price  #Monetary value of NPK fert
   
   ## Yield incomes
   rubber_yield <- vv(var_mean = max_rubber_yield, var_CV = Var_Cv, n = n_years)
-  rubber_yield <- rubber_yield * (1 - management_errors) * (1 - water_competition * yield_if_competition)
-  rubber_income <- rubber_yield * rubber_price
+rubber_income <- rubber_yield * (1 - management_errors) * (1 - water_competition * yield_if_competition) * rubber_price
     
   pepper_yield <- vv(var_mean = max_pepper_yield, var_CV = Var_Cv, n = n_years)
-  pepper_yield <- pepper_yield * (1 - management_errors)* (1 - water_competition * yield_if_competition)
-  pepper_income <- pepper_yield * pepper_price
+  pepper_income <- pepper_yield * (1 - management_errors) * (1 - water_competition * yield_if_competition) * pepper_price
   
 
 ## Summarize benefits
