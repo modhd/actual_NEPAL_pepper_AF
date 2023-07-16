@@ -1,0 +1,665 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Improving smallholder farmer's income through intercropping rubber and black pepper: A case study of Jhapa, Nepal},
+  pdfauthor={Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Improving smallholder farmer's income through intercropping rubber and black pepper: A case study of Jhapa, Nepal}
+\author{Norina Murtaza, Peter Asare-Nuamah, Aditi Bista, Heidi Hoffmann, Kalu Onyinyechi, Dorcas Sanginga}
+\date{2023-07-13}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{overview}{%
+\section{\texorpdfstring{\textbf{Overview}}{Overview}}\label{overview}}
+
+Rubber plant ( \emph{Hevea brasiliensis}) is a perennial crop and the natural source of rubber which is used in the production of a variety of products (\protect\hyperlink{ref-fox2013}{Fox and Castella 2013}; \protect\hyperlink{ref-pandey2020}{Pandey, Dhungana, and Sharma 2020}). Natural rubber farming is a safe and affordable alternative to synthetic rubber production.
+
+In recent decades, Nepal has experienced a huge trade deficit between the import and export of rubber and rubber-related products, and at the same time, their consumption exceeds production (\protect\hyperlink{ref-pandey2020}{Pandey, Dhungana, and Sharma 2020}; \protect\hyperlink{ref-cifor2022}{CIFOR-ICRAF 2022}). Furthermore, as rubber plants start yielding from six to seven years after planting (\protect\hyperlink{ref-Rodrigoa2005}{\textbf{Rodrigoa2005?}}) and, onwards, there is a need to diversify the system to enable farmers to generate income before rubber attains its maturity stage.
+
+Black pepper ( \emph{Piper nigrum L.}) is a valuable crop which could be suitable for this agronomic intervention but could also improve farmers livelihoods and lower their dependency on the international market/price fluctuation of rubber (\protect\hyperlink{ref-pandey2020}{Pandey, Dhungana, and Sharma 2020}).
+
+Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees. The the vertical space is used mor efficiently and weed competition potentially reduces within the plantation. Rubber trees, on the other hand, might benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth (\protect\hyperlink{ref-oliosi2021}{Oliosi, Oliveira, and Partelli 2021}).
+
+Nepal, being a country known for its diverse agro-climatic conditions (\protect\hyperlink{ref-oliosi2021}{Oliosi, Oliveira, and Partelli 2021}) , offers a favorable environment for intercropping rubber with black pepper. We assume it as a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
+
+\hypertarget{current-situation-of-rubber-production-in-nepal}{%
+\subsection{Current Situation of Rubber Production in Nepal}\label{current-situation-of-rubber-production-in-nepal}}
+
+Nepal's climate and land slope make natural rubber cultivation ideal for addressing issues such as underemployment, underutilization of land, and poverty. However, rubber monocropping poses several challenges for farmers, including a lack of income during the long immature period, vulnerability to price shocks, seasonality, disease outbreaks, and natural disaster (DERAF report, 2020). There is a high level of rubber and pepper imports because of tight supply conditions in Nepal (\protect\hyperlink{ref-pandey2020}{Pandey, Dhungana, and Sharma 2020}). To overcome these obstacles there is a need to promoting rubber agroforestry practices especially with compatible and mutual beneficial crop species.
+
+\hypertarget{why-a-rubber-and-black-pepper-agroforestry-system}{%
+\subsection{Why a Rubber and Black Pepper Agroforestry system?}\label{why-a-rubber-and-black-pepper-agroforestry-system}}
+
+Integrating black pepper and Rubber in an agroforestry system can offer a solution to improve food security, increase farmers' income, and enhance their livelihoods (\protect\hyperlink{ref-rahman2012}{Rahman et al. 2012}). Intercropping rubber with black pepper enables smallholders to diversify their income sources and optimize land utilization during the initial six years it takes for rubber trees to become productive (\protect\hyperlink{ref-oliosi2021}{Oliosi, Oliveira, and Partelli 2021}). Additionally, shading black pepper with rubber trees creates favorable growth conditions, including decreased irradiance and temperature, increased relative humidity, and higher leaf expansion, demonstrating adaptation to low light (\protect\hyperlink{ref-oliosi2021}{Oliosi, Oliveira, and Partelli 2021}).
+
+\hypertarget{decision-problem}{%
+\subsection{Decision Problem}\label{decision-problem}}
+
+To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as:
+
+\textbf{1. Economic Impact:} This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities.
+
+\textbf{2. Risk and Resilience:} focuses on assessing the vulnerability of rubber intercropping systems to price shocks, disease outbreaks, natural disasters, and other risks, while identifying strategies to mitigate them.
+
+\textbf{3. Policy and Market Support:} Involves the evaluation of existing policies, incentives, and market linkages to facilitate the adoption of rubber intercropping systems, addressing any barriers and gaps.
+
+\textbf{4. Cost-Benefit Analysis:} This focuses on a comprehensive cost-benefit analysis, comparing the economic, environmental, and social benefits of rubber intercropping systems with rubber monocropping.
+
+\textbf{5. Technical knowledge and support:} This considers whether farmers have access to technical knowledge and support. This includes understanding the agronomic practices, pest and disease management, harvesting, processing, and marketing strategies for both crops. Training programs, extension services, and collaboration with agricultural experts can help address these knowledge gaps.
+
+\hypertarget{decision}{%
+\subsection{Decision}\label{decision}}
+
+\textbf{Should farmers intercrop their Rubber monocultures with pepper?}
+
+\hypertarget{alternatives}{%
+\subsection{Alternatives}\label{alternatives}}
+
+\textbf{1. Baseline:} Promote Rubber monocropping
+\textbf{2. Alternative:} Promote Rubber and Black Pepper intercropping
+
+\hypertarget{decision-maker}{%
+\subsection{Decision Maker}\label{decision-maker}}
+
+The decision makers for this project are the smallholder rubber farmers in Jhapa, Nepal. The ultimate goal is to improve their income and livelihoods.
+
+\hypertarget{methods}{%
+\section{\texorpdfstring{\textbf{Methods}}{Methods}}\label{methods}}
+
+\hypertarget{conceptual-model}{%
+\subsection{Conceptual model}\label{conceptual-model}}
+
+A conceptual model depicting the influence of rubber and black pepper intercropping system costs, benefits and risks on Net Present value (NPV) was developed by the project group members who acted as the stakeholders @ref(fig:cenceptual\_model). The total cost comprised of establishment cost and maintenance cost, while total benefits comprised of natural and financial benefits. Lack of technical knowledge, water competition and economic fluctuation were the major risks identified. Economic fluctuation was however considered as a high variating variable in the price. A discount rate of 10 \% was chosen to calculate the Net Present Value.This conceptual model guided the development of the mathematical model.
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{results/conceptual_model} 
+
+}
+
+\caption{Conceptual Model}(\#fig:conceptual_model)
+\end{figure}
+
+\hypertarget{input-estimates}{%
+\subsection{Input estimates}\label{input-estimates}}
+
+Project group members who were calibrated in the decision analysis course were the experts. We used similar scenario from a literature search and some exchange with farmers in Nepal to generated input estimates with 90\% confidence.
+
+\begin{tabular}{l|r|r|l|l}
+\hline
+variable & lower & upper & distribution & description\\
+\hline
+n\_years & 25.0 & 25.0 & const & The time span that is modeled\\
+\hline
+discount\_rate & 10.0 & 10.0 & const & Discount rate \%\\
+\hline
+Var\_Cv & 5.0 & 10.0 & posnorm & Variance variables in \%\\
+\hline
+establishment\_cost\_mono & 77000.0 & 100000.0 & posnorm & Cost of rubber establishment in Nepalese rupee/ha  (1000 euro equals \textasciitilde{}144000 NPR)\\
+\hline
+establishment\_cost\_AF & 81300.0 & 144000.0 & posnorm & Cost of pepper and rubber establishment in Nepalese rupee/ha\\
+\hline
+rubber\_main\_cost & 451812.0 & 569792.0 & posnorm & Annual Cost to maintain rubber system (NPR)\\
+\hline
+pepper\_main\_cost & 75000.0 & 100000.0 & posnorm & Annual Cost to maintain black pepper system (NPR)\\
+\hline
+max\_pepper\_yield & 25.0 & 38.0 & posnorm & The peak yield of pepper (t/ha)\\
+\hline
+max\_rubber\_yield & 37.5 & 50.0 & posnorm & The peak yield of rubber (t/ha)\\
+\hline
+rubber\_price & 459420.0 & 687000.0 & posnorm & Price of rubber per tonnes\\
+\hline
+pepper\_price & 700000.0 & 900000.0 & posnorm & Price of pepper per tonne\\
+\hline
+mono\_nutrient & 2.0 & 6.0 & posnorm & Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in rubber monoculture (kg/ha)\\
+\hline
+AF\_nutrient & 4.0 & 10.0 & posnorm & Nutrients recycled equivalent of NPK fertilizer bags of 5O kg (15:15:15) from litter fall in Rubber-black pepper AF (kg/ha)\\
+\hline
+fertilizer\_price & 10812.0 & 12000.0 & posnorm & Monetary value of a 50 kg NPK fertilizer bag (NPR)\\
+\hline
+cost\_water & 1450.0 & 10000.0 & posnorm & Monetary value of water saved through interception in rubber mono (NPR)\\
+\hline
+water\_competition\_probability & 0.1 & 0.3 & tnorm\_0\_1 & The probability that roots will compete (higher irrigation costs and lower yields (\%)\\
+\hline
+yield\_if\_competition & 0.3 & 0.5 & posnorm & Estimated yield loss in case of competition to water compared to well watered plants (\%)\\
+\hline
+mean\_AF\_water & 600.0 & 2500.0 & posnorm & Mean of water(m\textasciicircum{}3/ha)\\
+\hline
+competition\_AF\_water & 1200.0 & 3100.0 & posnorm & plus 600 compared to "usual" need (m\textasciicircum{}3/ha)\\
+\hline
+knowledge\_gap\_probability & 0.2 & 0.4 & tnorm\_0\_1 & Percentual estimation of knowledge gaps to manage and yield the pepper (\%)\\
+\hline
+\end{tabular}
+
+\hypertarget{assumptions}{%
+\subsection{Assumptions}\label{assumptions}}
+
+Since Black Pepper grows best within moist climate, its cultivation usually requires irrigation (\protect\hyperlink{ref-fao2023}{FAO 2023}). The climate of Eastern Nepal is marked by the annual Monsoon and long dry seasons during winter (\protect\hyperlink{ref-worldbank2021}{World Bank 2021}). Thereby, especially the winter months are crucial to achieve high yields, and Pepper plants consequently would need to be irrigated.\\
+We assumed two scenarios concerning water regime in our agroforestry system: That on the first hand, black pepper grown next to rubber trees could mitigate irrigation requirements as the rubber's shadow would increase the moisture. Such a benefitial microclimate was documented in Brazilian pepper-rubber-agroforestry-systems (\protect\hyperlink{ref-oliosi2021}{Oliosi, Oliveira, and Partelli 2021}). Is has to be noted that this system consisted of alternating rows of rubber and pepper.
+Planted planted directly next to each other, the water competition might be higher. This is why we assumed that, on the other hand, intercroppping might amplify irrigation requirements as the roots in the topsoil could compete for water and both crops would produce smaller harvests.
+
+Additionally, it is reported that litterfall releases high amounts of primary macronutrients such as Nitrogen, Phosphorous, and potassium (NPK) back into the soil. Estimating how much each system recycles will help to determine the profitability and sustainability of the studied systems in regard to nutrient cycling and minimize fertilization inputs in the following cropping systems.
+
+\hypertarget{code}{%
+\subsection{Code}\label{code}}
+
+We used the \emph{decisionSupport} package (\protect\hyperlink{ref-R-decisionSupport}{Luedeling et al. 2022}) to build the mathematical model and for probabilistic analysis.
+
+\hypertarget{variating-variables}{%
+\subsubsection{Variating variables}\label{variating-variables}}
+
+Variables that shall variate with every annual step were calculated with using the\texttt{decisionSupport::vv()} function. Consequently, the variation accorded to our estimated ranges and underlying distributions (see \tab:input\_table).
+
+\hypertarget{chance-events}{%
+\subsubsection{Chance events}\label{chance-events}}
+
+Our two water regime scenarios were modelled using the \texttt{decisionSupport::chance\_event()}function. A chance of 10-30 \% was assumed that water competition would occur, leading to lower yields and higher irrigation costs.
+
+\hypertarget{model-function-which-will-be-used-to-run-the-monte-carlo-simulation}{%
+\subsubsection{Model function which will be used to run the Monte Carlo simulation}\label{model-function-which-will-be-used-to-run-the-monte-carlo-simulation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(decisionSupport)}
+
+\CommentTok{\# Read data{-}{-}{-}{-}}
+\NormalTok{table }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./data/AF\_input\_table.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{";"}\NormalTok{)}
+
+\CommentTok{\# Make variable to check what each code generates and if it works}
+
+\NormalTok{make\_variables }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(est,}\AttributeTok{n=}\DecValTok{1}\NormalTok{) \{ }
+\NormalTok{   x }\OtherTok{\textless{}{-}} \FunctionTok{random}\NormalTok{(}\AttributeTok{rho=}\NormalTok{est, }\AttributeTok{n=}\NormalTok{n)}
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{colnames}\NormalTok{(x)) }\FunctionTok{assign}\NormalTok{(i,}\FunctionTok{as.numeric}\NormalTok{(x[}\DecValTok{1}\NormalTok{,i]), }\AttributeTok{envir=}\NormalTok{.GlobalEnv)}
+\NormalTok{  \}}
+
+\FunctionTok{make\_variables}\NormalTok{(}\FunctionTok{as.estimate}\NormalTok{(table))}
+
+
+\CommentTok{\# Model function{-}{-}{-}{-}}
+
+\NormalTok{system\_benefit }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, varnames) \{}
+
+\DocumentationTok{\#\# Natural benefits {-}{-}{-}{-}}
+ \DocumentationTok{\#\#\# Nutrient cycling (from litterfall)}
+
+\NormalTok{mono\_nutrient }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ mono\_nutrient,}
+                            \AttributeTok{var\_CV =}\NormalTok{ Var\_Cv,}
+                            \AttributeTok{n =}\NormalTok{ n\_years) }
+
+\NormalTok{mono\_nutrient\_saved }\OtherTok{\textless{}{-}}\NormalTok{ mono\_nutrient}\SpecialCharTok{*}\NormalTok{ fertilizer\_price  }\CommentTok{\#Monetary value of NPK fertilizer bags saved in rubber monoculture}
+
+\NormalTok{AF\_nutrient }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ AF\_nutrient,}
+                            \AttributeTok{var\_CV =}\NormalTok{ Var\_Cv,}
+                            \AttributeTok{n =}\NormalTok{ n\_years)}
+
+\NormalTok{AF\_nutrient\_saved }\OtherTok{\textless{}{-}}\NormalTok{ AF\_nutrient }\SpecialCharTok{*}\NormalTok{ fertilizer\_price  }\CommentTok{\#Monetary value of NPK fertilizer bags saved in rubber and pepper system  }
+
+
+\DocumentationTok{\#\# Yields{-}{-}{-}{-}}
+ \DocumentationTok{\#\# Scenarios}
+  \DocumentationTok{\#\#\# As it is not known yet, the moist microclimate underneath the rubber trees can result in higher }
+  \DocumentationTok{\#\#\# pepper yields or, on the other hand, competition of the roots might lead to lower yields of both crops}
+\NormalTok{  water\_competition }\OtherTok{\textless{}{-}} \FunctionTok{chance\_event}\NormalTok{(water\_competition\_probability, }\AttributeTok{value\_if =} \DecValTok{1}\NormalTok{, }\AttributeTok{value\_if\_not =} \DecValTok{0}\NormalTok{)}
+  
+  \DocumentationTok{\#\#\# Account for risk in diminished yields due to knowledge gaps especially at the initial phase}
+  \DocumentationTok{\#\#\# and risk of knowledge gaps that could also lead to lower yields}
+\NormalTok{  management\_errors }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ knowledge\_gap\_probability, }\AttributeTok{var\_CV =}\NormalTok{ Var\_Cv,}
+                          \AttributeTok{n =}\NormalTok{ n\_years, }\AttributeTok{relative\_trend =} \SpecialCharTok{{-}} \DecValTok{10}\NormalTok{)}
+  
+  \DocumentationTok{\#\# Yield incomes}
+\NormalTok{  rubber\_yield }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ max\_rubber\_yield, }\AttributeTok{var\_CV =}\NormalTok{ Var\_Cv, }\AttributeTok{n =}\NormalTok{ n\_years)}
+\NormalTok{  rubber\_yield }\OtherTok{\textless{}{-}}\NormalTok{ rubber\_yield }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ management\_errors) }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ water\_competition }\SpecialCharTok{*}\NormalTok{ yield\_if\_competition)}
+\NormalTok{  rubber\_income }\OtherTok{\textless{}{-}}\NormalTok{ rubber\_yield }\SpecialCharTok{*}\NormalTok{ rubber\_price}
+    
+\NormalTok{  pepper\_yield }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ max\_pepper\_yield, }\AttributeTok{var\_CV =}\NormalTok{ Var\_Cv, }\AttributeTok{n =}\NormalTok{ n\_years)}
+\NormalTok{  pepper\_yield }\OtherTok{\textless{}{-}}\NormalTok{ pepper\_yield }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ management\_errors)}\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ water\_competition }\SpecialCharTok{*}\NormalTok{ yield\_if\_competition)}
+\NormalTok{  pepper\_income }\OtherTok{\textless{}{-}}\NormalTok{ pepper\_yield }\SpecialCharTok{*}\NormalTok{ pepper\_price}
+  
+
+\DocumentationTok{\#\# Summarize benefits}
+\NormalTok{  rubber\_benefit }\OtherTok{\textless{}{-}}\NormalTok{ rubber\_income }\SpecialCharTok{+}\NormalTok{ mono\_nutrient\_saved}
+\NormalTok{  AF\_benefit }\OtherTok{\textless{}{-}}\NormalTok{ pepper\_income }\SpecialCharTok{+}\NormalTok{ rubber\_income }\SpecialCharTok{+}\NormalTok{ AF\_nutrient\_saved}
+  
+
+\DocumentationTok{\#\# Costs{-}{-}{-}{-}}
+  \DocumentationTok{\#\#\# Establishment costs in first year}
+\NormalTok{  establistment\_cost\_mono }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(establishment\_cost\_mono, }\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_years }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{))}
+\NormalTok{  establistment\_cost\_AF }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(establishment\_cost\_AF, }\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_years }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{))}
+  
+\NormalTok{  maintenance\_cost\_mono }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ rubber\_main\_cost, }\AttributeTok{var\_CV =}\NormalTok{ Var\_Cv,}
+                              \AttributeTok{n =}\NormalTok{ n\_years)}
+\NormalTok{  maintenance\_cost\_pepper }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(}\AttributeTok{var\_mean =}\NormalTok{ pepper\_main\_cost, }\AttributeTok{var\_CV =}\NormalTok{ Var\_Cv,}
+                              \AttributeTok{n =}\NormalTok{ n\_years)}
+  
+  
+  \DocumentationTok{\#\#\# Water costs}
+  \DocumentationTok{\#\#\# pepper needs to be irrigated which is an addition cost.}
+\NormalTok{  price\_water }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(cost\_water, Var\_Cv, n\_years)}
+  
+  \ControlFlowTok{if}\NormalTok{ (water\_competition) \{}
+\NormalTok{    AF\_water }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(mean\_AF\_water,Var\_Cv, n\_years)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    AF\_water }\OtherTok{\textless{}{-}} \FunctionTok{vv}\NormalTok{(competition\_AF\_water, Var\_Cv, n\_years)}
+\NormalTok{  \}}
+    
+\NormalTok{  cost\_AF\_water }\OtherTok{\textless{}{-}}\NormalTok{ AF\_water }\SpecialCharTok{*}\NormalTok{ price\_water}
+  
+  
+  \DocumentationTok{\#\# Substracting the costs to get final benefits{-}{-}{-}{-}}
+  
+  \DocumentationTok{\#\#\# Mono rubber final benefits}
+\NormalTok{  final\_income\_mono }\OtherTok{\textless{}{-}}\NormalTok{ rubber\_benefit }\SpecialCharTok{{-}}\NormalTok{ (maintenance\_cost\_mono }\SpecialCharTok{+}\NormalTok{ establishment\_cost\_mono)}
+    
+  \DocumentationTok{\#\#\# Rubber intercropping final benefits}
+\NormalTok{  final\_income\_AF }\OtherTok{\textless{}{-}}\NormalTok{ AF\_benefit }\SpecialCharTok{{-}}\NormalTok{ (establishment\_cost\_AF }\SpecialCharTok{+}\NormalTok{ maintenance\_cost\_pepper}
+                                                   \SpecialCharTok{+}\NormalTok{ maintenance\_cost\_mono }\SpecialCharTok{+}\NormalTok{ cost\_AF\_water)}
+
+  \DocumentationTok{\#\#\# Trade off benefits and cashflow}
+\NormalTok{tradeoff\_benefit }\OtherTok{\textless{}{-}}\NormalTok{ final\_income\_AF }\SpecialCharTok{{-}}\NormalTok{ final\_income\_mono}
+
+\NormalTok{cashflow }\OtherTok{\textless{}{-}}\NormalTok{ final\_income\_AF}
+
+  \DocumentationTok{\#\#\# NPV }
+\NormalTok{NPV\_mono }\OtherTok{\textless{}{-}} \FunctionTok{discount}\NormalTok{(final\_income\_mono, }\AttributeTok{discount\_rate =}\NormalTok{ discount\_rate, }\AttributeTok{calculate\_NPV =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\#for rubber monoculture}
+
+\NormalTok{NPV\_tradeoff }\OtherTok{\textless{}{-}} \FunctionTok{discount}\NormalTok{(tradeoff\_benefit, }\AttributeTok{discount\_rate =}\NormalTok{ discount\_rate, }\AttributeTok{calculate\_NPV =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\#for the decision }
+  
+\NormalTok{NPV\_AF }\OtherTok{\textless{}{-}} \FunctionTok{discount}\NormalTok{(final\_income\_AF, }\AttributeTok{discount\_rate =}\NormalTok{ discount\_rate, }\AttributeTok{calculate\_NPV =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\#for rubber and pepper}
+  
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{cashflow=}\NormalTok{ cashflow,}\AttributeTok{NPV\_decision=}\NormalTok{ NPV\_tradeoff,}
+              \AttributeTok{NPV\_rubber=}\NormalTok{ NPV\_mono, }\AttributeTok{NPV\_AF=}\NormalTok{ NPV\_AF))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{results-and-discussion}{%
+\section{\texorpdfstring{\textbf{Results and Discussion}}{Results and Discussion}}\label{results-and-discussion}}
+
+\hypertarget{monte-carlo-simulation}{%
+\subsection{\texorpdfstring{\textbf{Monte Carlo simulation}}{Monte Carlo simulation}}\label{monte-carlo-simulation}}
+
+This generates all possible outcomes of our interventions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{AF\_mc\_simulation }\OtherTok{\textless{}{-}} \FunctionTok{mcSimulation}\NormalTok{(}\FunctionTok{as.estimate}\NormalTok{(table),}
+                                         \AttributeTok{model\_function =}\NormalTok{ system\_benefit,}
+                                         \AttributeTok{numberOfModelRuns =} \DecValTok{1000}\NormalTok{,}
+                                         \AttributeTok{functionSyntax =} \StringTok{"plainNames"}\NormalTok{)}
+\FunctionTok{write.csv}\NormalTok{(AF\_mc\_simulation, }\StringTok{"./results/mc\_simulation\_results.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{plotting-the-net-present-value-npv}{%
+\subsection{\texorpdfstring{\textbf{Plotting the Net Present Value (NPV)}}{Plotting the Net Present Value (NPV)}}\label{plotting-the-net-present-value-npv}}
+
+Plotting the NPV shows the outcome distribution of the different alternatives or/and of the decision, based on the Monte Carlo simulation results. The distribution plots generate an overlay economic output of the decision option.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# NPV distribution as histogram}
+\FunctionTok{plot\_distributions}\NormalTok{(}\AttributeTok{mcSimulation\_object =}\NormalTok{ AF\_mc\_simulation,}
+                  \AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"NPV\_rubber"}\NormalTok{, }\StringTok{"NPV\_AF"}\NormalTok{),}
+                  \AttributeTok{method =} \StringTok{\textquotesingle{}smooth\_simple\_overlay\textquotesingle{}}\NormalTok{,}
+                  \AttributeTok{colors =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#0000FF"}\NormalTok{,}\StringTok{"\#F0E442"}\NormalTok{),}
+                  \AttributeTok{base\_size =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# NPV distribution as boxplot}
+\FunctionTok{plot\_distributions}\NormalTok{(}\AttributeTok{mcSimulation\_object =}\NormalTok{ AF\_mc\_simulation,}
+                  \AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"NPV\_rubber"}\NormalTok{, }\StringTok{"NPV\_AF"}\NormalTok{),}
+                  \AttributeTok{method =} \StringTok{\textquotesingle{}boxplot\textquotesingle{}}\NormalTok{,}
+                  \AttributeTok{colors =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#0000FF"}\NormalTok{,}\StringTok{"\#F0E442"}\NormalTok{),}
+                  \AttributeTok{base\_size =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Value of the decision }
+\FunctionTok{plot\_distributions}\NormalTok{(}\AttributeTok{mcSimulation\_object =}\NormalTok{ AF\_mc\_simulation,}
+                  \AttributeTok{vars =} \StringTok{"NPV\_decision"}\NormalTok{,}
+                  \AttributeTok{method =} \StringTok{\textquotesingle{}smooth\_simple\_overlay\textquotesingle{}}\NormalTok{,}
+                  \AttributeTok{base\_size =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-3-3.pdf}
+
+\hypertarget{cashflow-analysis}{%
+\subsection{\texorpdfstring{\textbf{Cashflow analysis}}{Cashflow analysis}}\label{cashflow-analysis}}
+
+This generates the monetary benefits trend during the simulated intervention period
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cashflow }\OtherTok{\textless{}{-}} \FunctionTok{plot\_cashflow}\NormalTok{(}\AttributeTok{mcSimulation\_object =}\NormalTok{ AF\_mc\_simulation,}
+                          \AttributeTok{cashflow\_var\_name =} \StringTok{"cashflow"}\NormalTok{,}
+                          \AttributeTok{x\_axis\_name =} \StringTok{"Years of intervention"}\NormalTok{,}
+                          \AttributeTok{y\_axis\_name =} \StringTok{"Cashflow in Nepali Rupee"}\NormalTok{,}
+                          \AttributeTok{color\_25\_75 =} \StringTok{"grey"}\NormalTok{,}
+                          \AttributeTok{color\_5\_95 =} \StringTok{"yellow"}\NormalTok{,}
+                          \AttributeTok{color\_median=} \StringTok{"red"}\NormalTok{,}
+                          \AttributeTok{base=} \DecValTok{10}\NormalTok{)}
+
+\NormalTok{cashflow}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\hypertarget{sensitivity-analysis-pls}{%
+\subsection{\texorpdfstring{\textbf{Sensitivity analysis (PLS)}}{Sensitivity analysis (PLS)}}\label{sensitivity-analysis-pls}}
+
+In this part, we run a post\_host analysis using the partial least square regression (PLS).This generated
+the projection score (VIP). The VIP score shows the variables to which the model is more sensitive either positively(green) or negatively(red); and which could possibly have a high impact on the outcome of the decision.
+A threshold of 0.8 was given, hence any variable with a VIP score above 0.8 was considered important.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# To get names of elements on list y and x }
+\FunctionTok{names}\NormalTok{(AF\_mc\_simulation}\SpecialCharTok{$}\NormalTok{x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "n_years"                       "discount_rate"                
+##  [3] "Var_Cv"                        "establishment_cost_mono"      
+##  [5] "establishment_cost_AF"         "rubber_main_cost"             
+##  [7] "pepper_main_cost"              "max_pepper_yield"             
+##  [9] "max_rubber_yield"              "rubber_price"                 
+## [11] "pepper_price"                  "mono_nutrient"                
+## [13] "AF_nutrient"                   "fertilizer_price"             
+## [15] "cost_water"                    "water_competition_probability"
+## [17] "yield_if_competition"          "mean_AF_water"                
+## [19] "competition_AF_water"          "knowledge_gap_probability"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(AF\_mc\_simulation}\SpecialCharTok{$}\NormalTok{y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "cashflow1"    "cashflow2"    "cashflow3"    "cashflow4"    "cashflow5"   
+##  [6] "cashflow6"    "cashflow7"    "cashflow8"    "cashflow9"    "cashflow10"  
+## [11] "cashflow11"   "cashflow12"   "cashflow13"   "cashflow14"   "cashflow15"  
+## [16] "cashflow16"   "cashflow17"   "cashflow18"   "cashflow19"   "cashflow20"  
+## [21] "cashflow21"   "cashflow22"   "cashflow23"   "cashflow24"   "cashflow25"  
+## [26] "NPV_decision" "NPV_rubber"   "NPV_AF"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# VIP scores}
+\NormalTok{pls\_results }\OtherTok{\textless{}{-}} \FunctionTok{plsr.mcSimulation}\NormalTok{(}\AttributeTok{object =}\NormalTok{ AF\_mc\_simulation,}
+                                 \AttributeTok{resultName =} \StringTok{"NPV\_decision"}\NormalTok{,}
+                                 \AttributeTok{ncomp =} \DecValTok{1}\NormalTok{)}
+
+\DocumentationTok{\#\#\# Cut off at 0.8}
+\FunctionTok{plot\_pls}\NormalTok{(pls\_results, }\AttributeTok{threshold =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{input\_table =}\NormalTok{ table)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Cut off at 0 to appreciate the impact of most of our variables on the outcome}
+\FunctionTok{plot\_pls}\NormalTok{(pls\_results, }\AttributeTok{threshold =} \DecValTok{0}\NormalTok{, }\AttributeTok{input\_table =}\NormalTok{ table)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\hypertarget{value-of-information-voi-analysis}{%
+\subsection{\texorpdfstring{\textbf{Value of information (VoI) analysis}}{Value of information (VoI) analysis}}\label{value-of-information-voi-analysis}}
+
+This analysis is crucial since it informs the decision-maker how much he/she be willing to pay if given perfect information, to reduce uncertainities and avoid opportunity loss.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mcresults\_table }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(AF\_mc\_simulation}\SpecialCharTok{$}\NormalTok{x,}
+\NormalTok{                          AF\_mc\_simulation}\SpecialCharTok{$}\NormalTok{y[}\DecValTok{26}\SpecialCharTok{:}\DecValTok{28}\NormalTok{])}
+
+\NormalTok{evpi}\OtherTok{\textless{}{-}} \FunctionTok{multi\_EVPI}\NormalTok{(}\AttributeTok{mc=}\NormalTok{ mcresults\_table,}
+                  \AttributeTok{first\_out\_var =} \StringTok{"NPV\_decision"}\NormalTok{, }\AttributeTok{write\_table =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{outfolder =}\NormalTok{ .}\SpecialCharTok{/}\NormalTok{results}\SpecialCharTok{/}\NormalTok{evpi\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Processing 3 output variables. This can take some time."
+## [1] "Output variable 1 (NPV_decision) completed."
+## [1] "Output variable 2 (NPV_rubber) completed."
+## [1] "Output variable 3 (NPV_AF) completed."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plot\_evpi}\OtherTok{\textless{}{-}}\FunctionTok{plot\_evpi}\NormalTok{(evpi,}
+          \AttributeTok{decision\_vars =} \StringTok{"NPV\_decision"}\NormalTok{,}
+          \AttributeTok{new\_name=} \StringTok{"Rubber and black pepper"}\NormalTok{,}
+          \AttributeTok{unit=} \StringTok{"NPR"}\NormalTok{,}
+          \AttributeTok{bar\_color=} \StringTok{"yellow4"}\NormalTok{,}
+          \AttributeTok{base\_size=}\DecValTok{10}\NormalTok{)}
+
+\NormalTok{plot\_evpi}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\hypertarget{compound-figures}{%
+\subsection{\texorpdfstring{\textbf{Compound figures}}{Compound figures}}\label{compound-figures}}
+
+This is a simple function/code of the entire process
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{compound\_figure}\NormalTok{(}\AttributeTok{model =}\NormalTok{ system\_benefit, }
+\AttributeTok{input\_table =}\NormalTok{ table, }
+\AttributeTok{decision\_var\_name =} \StringTok{"NPV\_decision"}\NormalTok{,}
+\AttributeTok{cashflow\_var\_name =} \StringTok{"cashflow"}\NormalTok{,}
+\AttributeTok{model\_runs =} \DecValTok{1000}\NormalTok{,}
+\AttributeTok{distribution\_method =} \StringTok{\textquotesingle{}smooth\_simple\_overlay\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Processing 1 output variables. This can take some time."
+## [1] "Output variable 1 (NPV_decision) completed."
+\end{verbatim}
+
+\includegraphics{agroforestry_project_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\hypertarget{limitations}{%
+\section{\texorpdfstring{\textbf{Limitations}}{Limitations}}\label{limitations}}
+
+We would have wished to have a holistic analysis of the system by considering more aspects, ideally the ones that would consider the sustainable development goals that fit into our context. Aspects that we ought to have considered but did not for the sake of simplicity and practice, are social aspects (political, cultural, gender), and more environmental benefits such as biodiversity and system sustainability.
+
+\hypertarget{conclusion}{%
+\section{\texorpdfstring{\textbf{Conclusion}}{Conclusion}}\label{conclusion}}
+
+This analysis reports the NPV difference of rubber monoculture versus rubber and black pepper intercropping. Based on our own estimates, the Monte Carlo results show that rubber and black pepper intercropping is likely to be a profitable intervention but could also lead to losses. The cashflow chart shows gradual gains during the simulated period of intervention.
+
+Our model was more sensitive to the price of water, maximum pepper yield as well as the probability of water competition in the intercropping system, due to their high VIP score. This indicates that there is need for further research on those variables in order to reduce uncertainties and make an informed decision.
+
+\hypertarget{references}{%
+\section*{\texorpdfstring{\textbf{References}}{References}}\label{references}}
+\addcontentsline{toc}{section}{\textbf{References}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-cifor2022}{}}%
+CIFOR-ICRAF. 2022. {``Rubber Set to Revitalize {Nepal}'s Degraded and Underutilized Lands to Boost Climate and Livelihoods' Goals.''} \emph{CIFOR-ICRAF}. \url{https://www.cifor-icraf.org/news/corporate-news/rubber-set-to-revitalize-nepals-degraded-and-underutilized-lands-to-boost-climate-and-livelihoods-goals/}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fao2023}{}}%
+FAO. 2023. {``Pepper - {Crop} Information.''} \emph{Land \& Water - Databases and Software}. \url{https://www.fao.org/land-water/databases-and-software/crop-information/pepper/en/}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fox2013}{}}%
+Fox, Jefferson, and Jean-Christophe Castella. 2013. {``Expansion of Rubber ({Hevea} Brasiliensis) in {Mainland} {Southeast} {Asia}: What Are the Prospects for Smallholders?''} \emph{The Journal of Peasant Studies} 40 (1): 155--70. \url{https://doi.org/10.1080/03066150.2012.750605}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-decisionSupport}{}}%
+Luedeling, Eike, Lutz Goehring, Katja Schiffers, Cory Whitney, and Eduardo Fernandez. 2022. \emph{decisionSupport: Quantitative Support of Decision Making Under Uncertainty}. \url{http://www.worldagroforestry.org/}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-oliosi2021}{}}%
+Oliosi, Gleison, Marcos Góes Oliveira, and Fabio Luiz Partelli. 2021. {``Microclimate and Development of Black Pepper Intercropped with Rubber Tree.''} \emph{Agroforestry Systems} 95 (8): 1635--45. \url{https://doi.org/10.1007/s10457-021-00674-y}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pandey2020}{}}%
+Pandey, S. R., S. M. Dhungana, and G. P. Sharma. 2020. {``Economics of Production and Marketing of Natural Rubber ({Hevea} Brasiliensis) in {Jhapa}, {Nepal}.''} \emph{Archives of Agriculture and Environmental Science} 5 (1): 25--32. \url{https://doi.org/10.26832/24566632.2020.050104}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rahman2012}{}}%
+Rahman, Syed Ajijur, Muhammad Hasan Imam, Denyse J. Snelder, and Terry Sunderland. 2012. {``Agroforestry for {Livelihood} {Security} in {Agrarian} {Landscapes} of the {Padma} {Floodplain} in {Bangladesh}.''} \emph{Small-Scale Forestry} 11 (4): 529--38. \url{https://doi.org/10.1007/s11842-012-9198-y}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-worldbank2021}{}}%
+World Bank. 2021. {``World {Bank} {Climate} {Change} {Knowledge} {Portal}.''} \url{https://climateknowledgeportal.worldbank.org/}.
+
+\end{CSLReferences}
+
+\end{document}

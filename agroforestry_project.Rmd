@@ -28,7 +28,7 @@ library(readr)
 
 ```{r, add_packages_bib, include=FALSE}
 knitr::write_bib(c(.packages(),
-                   'decisionSupport', 'DiagrammeR'), 'bib/packages.bib')
+                   'decisionSupport'), 'bib/packages.bib')
 
 ```
 
@@ -37,23 +37,23 @@ knitr::write_bib(c(.packages(),
 
 Rubber plant ( _Hevea brasiliensis_) is a perennial crop and the natural source of rubber which is used in the production of a variety of products [@fox2013; @pandey2020]. Natural rubber farming is a safe and affordable alternative to synthetic rubber production. 
 
-In recent decades, Nepal has experienced a huge trade deficit between the import and export of rubber and rubber-related products, and at the same time, their consumption exceeds production [@pandey2020; @cifor2022]. Furthermore, as rubber plants start yielding from six to seven years after planting [@Rodrigoa2005]  and, onwards, there is a need to diversify the system to enable farmers to generate income before rubber attains its maturity stage.  
+In recent decades, Nepal has experienced a huge trade deficit between the import and export of rubber and rubber-related products, and at the same time, their consumption exceeds production [@pandey2020; @cifor2022]. Furthermore, as rubber plants start yielding from six to seven years after planting [@pandey2020]  and, onwards, there is a need to diversify the system to enable farmers to generate income before rubber attains its maturity stage.  
 
 Black pepper ( _Piper nigrum L._) is a valuable crop which could be suitable for this agronomic intervention but could also improve farmers livelihoods and lower their dependency on the international market/price fluctuation of rubber [@pandey2020]. 
 
 
-Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees. The the vertical space is used mor efficiently and weed competition potentially reduces within the plantation. Rubber trees, on the other hand, might benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth [@oliosi2021].
+Intercropping black pepper and rubber capitalizes on their complementary growth patterns and could potentially improve the ecological and financial advantages of rubber farming. Black pepper, a vine-like plant, thrives in the shade provided by the rubber trees. The the vertical space is used more efficiently and weed competition potentially reduces within the plantation. Rubber trees, on the other hand, might benefit from the protection provided by the pepper vines which act as a natural windbreak and provide a microclimate conducive to rubber growth [@oliosi2021].
 
 Nepal, being a country known for its diverse agro-climatic conditions [@oliosi2021] , offers a favorable environment for intercropping rubber with black pepper. We assume it as a system that could maximize productivity and economic returns if planted in a well-planned agroforestry system.
 
 ## Current Situation of Rubber Production in Nepal
 Nepal's climate and land slope make natural rubber cultivation ideal for addressing issues such as underemployment, underutilization of land, and poverty. However, rubber monocropping poses several challenges for farmers, including a lack of income during the long immature period, vulnerability to price shocks, seasonality, disease outbreaks, and natural disaster (DERAF report, 2020). There is a high level of rubber and pepper imports because of tight supply conditions in Nepal [@pandey2020]. To overcome these obstacles there is a need to promoting rubber agroforestry practices especially with compatible and mutual beneficial crop species. 
 
-## Why a Rubber and Black Pepper Agroforestry system?
+## Why Rubber and Black Pepper Agroforestry system?
 Integrating black pepper and Rubber in an agroforestry system can offer a solution to improve food security, increase farmers' income, and enhance their livelihoods [@rahman2012]. Intercropping rubber with black pepper enables smallholders to diversify their income sources and optimize land utilization during the initial six years it takes for rubber trees to become productive [@oliosi2021]. Additionally, shading black pepper with rubber trees creates favorable growth conditions, including decreased irradiance and temperature, increased relative humidity, and higher leaf expansion, demonstrating adaptation to low light [@oliosi2021].
 
 ## Decision Problem
-To improve income and the livelihoods of farmers in Nepal farmers might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as:
+To improve their income and livelihoods, farmers in Nepal might want to adopt rubber agroforestry practices, specifically intercropping black pepper with rubber, as an alternative to rubber monocropping. Farmers' decisions are influenced by factors such as:
 
 
 __1. Economic Impact:__ This assesses the potential income generation and economic viability of rubber intercropping practices compared to rubber monocropping, considering factors such as yield, market demand, price stability, and income diversification opportunities. 
@@ -71,7 +71,7 @@ __5. Technical knowledge and support:__ This considers whether farmers have acce
 
 ## Decision
 
-**Should farmers intercrop their Rubber monocultures with pepper?**
+**Should farmers intercrop their Rubber monocultures with black pepper?**
 
 ## Alternatives
 
@@ -282,7 +282,7 @@ plot_distributions(mcSimulation_object = AF_mc_simulation,
 ```
 
 ## **Cashflow analysis**
-This generates the monetary benefits trend during the simulated intervention period
+This generates the monetary benefits trend of our proposed intervention during the simulated period
 
 ```{r}
 cashflow <- plot_cashflow(mcSimulation_object = AF_mc_simulation,
@@ -300,7 +300,7 @@ cashflow
 
 ## **Sensitivity analysis (PLS)**
 In this part, we run a post_host analysis using the partial least square regression (PLS).This generated
-the projection score (VIP). The VIP score shows the variables to which the model is more sensitive either positively(green) or negatively(red); and which could possibly have a high impact on the outcome of the decision.
+the variable importance in projection (VIP) scores. The VIP score shows the variables to which the model is more sensitive either positively(green) or negatively(red); and which could possibly have a high impact on the outcome of the decision.
 A threshold of 0.8 was given, hence any variable with a VIP score above 0.8 was considered important.
 
 ```{r}
@@ -325,7 +325,7 @@ plot_pls(pls_results, threshold = 0, input_table = table)
 ```
 
 ## **Value of information (VoI) analysis**
-This analysis is crucial since it informs the decision-maker how much he/she be willing to pay if given perfect information, to reduce uncertainities and avoid opportunity loss. 
+This analysis is crucial since it informs the decision-maker how much he/she should be willing to pay if given perfect information, to eliminate uncertainities and avoid opportunity loss. 
 
 ```{r}
 
@@ -348,7 +348,7 @@ plot_evpi
 ```
 
 ## **Compound figures**
-This is a simple function/code of the entire process
+This is a simple function/code of the entire process and runs the full decision for a binary decision assessment (to find out whether it is worth doing or not)
 
 ```{r}
 compound_figure(model = system_benefit, 
