@@ -1,7 +1,10 @@
 # "Improving smallholder farmer's income through intercropping rubber and black pepper: A case study of Jhapa, Nepal"
 
 A decision analysis whether smallholder farmes in Nepal should intercrop their rubber monocultures with black pepper. A contribution of the online-team to the module "Desicion Analysis and Forecasting for Agricultural Development" at University Bonn.
-![The full report of this work can be accessed on http://htmlpreview.github.io/?.](https://github.com/modhd/actual_NEPAL_pepper_AF/blob/main/agroforestry_project.html)
+The full report of this work can be accessed on http://htmlpreview.github.io/?
+
+
+![https://github.com/modhd/actual_NEPAL_pepper_AF/blob/main/agroforestry_project.html.]
 
 
 ![The according conceptual model.](https://github.com/modhd/actual_NEPAL_pepper_AF/blob/main/results/conceptual_model.png?raw=true)
